@@ -1,0 +1,10 @@
+{
+ "compilerOptions": {
+  "baseUrl": ".",
+  "paths": {
+   "*": [
+    "../../hugo-theme-stack/assets/*"
+   ]
+  }
+ }
+}
