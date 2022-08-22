@@ -128,9 +128,9 @@ $defaultTagColors: #fff, #fff, #fff, #fff, #fff;
         --code-text-color: rgba(255, 255, 255, 0.9);
 
         --table-border-color: #717171;
-        --tr-even-background-color: #545454;
+        --tr-even-background-color: rgb(46, 46, 46);
 
-        --blockquote-background-color: rgb(75 75 75);
+        --blockquote-background-color: rgb(46, 46, 46);
     }
 }
 
@@ -154,7 +154,7 @@ $defaultTagColors: #fff, #fff, #fff, #fff, #fff;
 
 [data-scheme="dark"] {
     --pre-text-color: #f8f8f2;
-    --pre-background-color: #272822;
+    --pre-background-color: #222222;
     @import "partials/highlight/dark.scss";
 }
 
