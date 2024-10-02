@@ -39,7 +39,8 @@ $ pattern_search
 ```
 
 As we can see, it will not be that trivial to exploit the vulnerability since `RIP` is not directly controlled. However, we can see that `RIP` will point to a `call` instruction, with the function address stored in `RAX`, and `RAX` retrieve this function adress from the value pointed by `R12`:
-![](gdb.png)
+
+![GDB-peda view of the overflow](gdb.png)
 
 So, to summarize:
 - We can change what is pointed by `R12` with the overflow,
@@ -55,7 +56,8 @@ call *(*R12) = call *overflow[??]
 Then, we can control the flow and if we change what is pointed by `R12` to a pointer to a vulnerable code, we win.
 
 Without reversing we already have a lot of information, but to validate our hypothesis we will have to open [Ghidra](https://ghidra-sre.org/). We quickly find that the code is in C++ (good news) and therefore there is a lot of garbage code. We start to focus on the `Cat` structure (we can make the hypothesis that it's a class) and find some interesting information using the structure editor of Ghidra:
-![](ghidra_cat.png)
+
+![Reverse of the `Cat` structure](ghidra_cat.png)
 
 As we can see, the `Cat` class is composed of a `name` field of 64 bytes (where the overflow is happening) and a super interesting function pointer `vptr_Cat`. We know that this a sign of a `vtable` and confirm that `Cat` is a class, that surely deal with inheritance.
 
@@ -70,7 +72,8 @@ Since everything is better explained with a diagram, here is one:
 ![](https://www.learncpp.com/images/CppTutorial/Section12/VTable.gif)
 
 If you want to delve deeper into the subject, a good reference is available here: [SMASHING C++ VPTRS](http://phrack.org/issues/56/8.html). We can see the `vtable` in `gdb`:
-![](gdb_vtable.png)
+
+![Vtable view in gdb](gdb_vtable.png)
 
 So, we know via `gdb` that we need to deal with a function pointer to exploit the buffer overflow, and we just saw that the overflowable `Cat` class contains a `vptr`. We are close to victory, now we just have to make a choice to exploit the situation:
 - Place our own `vtable` (pointer) in memory and make `R12` point to it,
@@ -86,10 +89,12 @@ RELRO     : Partial
 ```
 
 That's good, we can use both techniques without issue (we don't have to deal with any canaries for this buffer overflow). Now let's find the offset to control `R12`:
-![](gdb_overflow.png)
+
+![GDB view of the R12 overflow and offset](gdb_overflow.png)
 
 The offset is `64 (name) + 8 (padding)` to control what is pointed by `R12` and therefore `RAX`. We can now search for a vulnerable function in Ghidra by searching for a reference to `flag.txt` (CTF classic):
-![](ghidra_vuln_fn.png)
+
+![Ghidra disassembly of a function containing the flag](ghidra_vuln_fn.png)
 
 Vulnerable function found, in place of the `pet` function of the `HackerCat` structure. After a bit more digging in [Ghidra](https://ghidra-sre.org/), we know that `HackerCat` inherit from the `Cat` class, and that the function `pet` is a virtual function. Therefore, to call this function the binary will use the `vtable` of the concerned object.
 
@@ -111,10 +116,12 @@ So we have again two possibilities:
 - We can use `A - List all cats` that call another virtual function. This implies replacing a virtual function address with `HackerCat::pet`.
 
 In a diagram this translates to (we find at the top the initial situations, and at the bottom the corresponding exploitation path):
-![](exploits.svg)
+
+![Possible exploitation paths, one per column](exploits.png)
 
 Both options are good, but let's take the second option that is simpler to debug. Let's retrieve the `vtable` address of `HackerCat` and the address of the pointer to `HackerCat::pet` in the same table:
-![](ghidra_vtable.png)
+
+![Show the vtable of HackerCat in Ghidra](ghidra_vtable.png)
 
 Now, our plan is complete and, since there are no particular protections, we can test everything locally and find the right addresses, then we will just have to replay the same sequence on the online address. The plan is therefore as follows:
 - We know that we can overwrite the address of the `vtable` of `Cat` objects.

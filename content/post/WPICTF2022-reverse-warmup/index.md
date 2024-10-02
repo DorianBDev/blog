@@ -25,7 +25,8 @@ To do a small warming up before the [Purple Pill Challenge CTF](https://challeng
 ## Taylor's Serious Data
 
 This was a (very) simple one. We were given an x64 ELF binary with a text file "songLyrics.txt" that seems encrypted. After opening the binary in [Cutter](https://cutter.re/), we can find the encryption routine in the `main` function:
-![](1_cutter.png)
+
+![Encryption routine from Cutter](1_cutter.png)
 
 As we can see in the decompiler window, the binary takes two arguments:
 - An initial file path,
@@ -68,8 +69,9 @@ And we get the flag `WPI{TaYl0rs_v3rS1oN}`. This was a very simple warmup, no tr
 
 ## xf1ltr80r 
 
-Let's investigate a second challenge. We start with a x64 ELF binary, and since I liked using [Cutter](https://cutter.re/) on the previous challenge, I'll continue with it. After opening the binary, we easily find the function containing "data to exfiltrate" :
-![](2_cutter.png)
+Let's investigate a second challenge. We start with a x64 ELF binary, and since I liked using [Cutter](https://cutter.re/) on the previous challenge, I'll continue with it. After opening the binary, we easily find the function containing "data to exfiltrate":
+
+![Disassembly of a function with data to exfiltrate](2_cutter.png)
 
 The padding (`==`) at the end of the many blobs of data seem to indicate a base64 encoded string. Let's retrieve the full encoded string:
 ```
@@ -77,14 +79,16 @@ V1BJezN4dHIzbTNseV9uI3JkeV8xMzM3NXAzNGt9Cg==
 ```
 
 We can now use [Cyberchef](https://gchq.github.io/CyberChef/) to perform the operation:
-![](2_cyberchef.png)
+
+![Base64 conversion using CyberChef](2_cyberchef.png)
 
 And another flag: `WPI{3xtr3m3ly_n#rdy_13375p34k}`. Very trivial.
 
 ## NeedToCough 
 
 This is the last "easy" challenge I did and it was, in my opinion, the best one (still trivial, but the journey was nice and somehow realistic). We start the challenge with a `pcap` file that contains multiple HTTP requests and an encrypted file that was a `jpg` image. After analyzing some frames, I found that these requests contained a file. Therefore, I exported it using Wireshark:
-![](3_wireshark.png)
+
+![Wireshark view of the pcap](3_wireshark.png)
 
 I obtained (again) a nice x64 ELF binary file. Since it worked well for the previous challenges, I stayed with [Cutter](https://cutter.re/) here, and analyzed the code. After a high level review on the disassembly, I found that the majority of the code was garbage about a notice drop (ransomware-like), so I focused on the encryption loop. I found four interesting functions:
 - One that converts an input to hexadecimal code,
@@ -93,7 +97,8 @@ I obtained (again) a nice x64 ELF binary file. Since it worked well for the prev
 - And a last one that generates the permutation table.
 
 The part that generates the permutation table is at the beginning of a function that also deals with the notice part (useless here):
-![](3_permutation_table.png)
+
+![Disassembly of a function that generate the permutation table](3_permutation_table.png)
 
 As I said before, I prefer to look at the assembly rather than the decompiler code (especially when you see how little code is present). I extracted this pseudo-code used to generate the permutation table:
 ```r
@@ -141,7 +146,8 @@ for i in range(0x10):
 ```
 
 Then, we can continue with another easy part, by analyzing the hexadecimal table generation code:
-![](3_hexa_table.png)
+
+![Function that generate a string](3_hexa_table.png)
 
 We can translate this assembly function to python:
 ```python
@@ -162,7 +168,8 @@ As we can see, it's a complicated code for a simple task, in the end it just gen
 ```
 
 We can now analyze the main encryption loop:
-![](3_permutation_loop.png)
+
+![Disassembly of the main encryption loop](3_permutation_loop.png)
 
 As we can see in [Cutter](https://cutter.re/), the permutation loop is very simple, and we can reconstruct it in python:
 ```python
@@ -242,7 +249,8 @@ f.close()
 A tip I used to debug this script was checking that we get the magic number of JPEG files for the first bytes. This can also be used to brute force the permutation table (if you don't like reverse engineering 😉).
 
 After running the script on the provided file (containing the encrypted image to retrieve), I obtained the initial image:
-![](3_res.png)
+
+![Final image containing the flag](3_res.png)
 
 And the flag was `WPI{cybercriminals != pentesters}`!
 
