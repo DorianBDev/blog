@@ -30,12 +30,13 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[=&lt;/span>&amp;gt; overflow &lt;span class="o">(&lt;/span>RAX erase and RIP pointing to call &lt;span class="o">[&lt;/span>RAX&lt;span class="o">])]]&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>As we can see, it will not be that trivial to exploit the vulnerability since &lt;code>RIP&lt;/code> is not directly controlled. However, we can see that &lt;code>RIP&lt;/code> will point to a &lt;code>call&lt;/code> instruction, with the function address stored in &lt;code>RAX&lt;/code>, and &lt;code>RAX&lt;/code> retrieve this function adress from the value pointed by &lt;code>R12&lt;/code>:
-&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb.png"
+&lt;/div>&lt;p>As we can see, it will not be that trivial to exploit the vulnerability since &lt;code>RIP&lt;/code> is not directly controlled. However, we can see that &lt;code>RIP&lt;/code> will point to a &lt;code>call&lt;/code> instruction, with the function address stored in &lt;code>RAX&lt;/code>, and &lt;code>RAX&lt;/code> retrieve this function adress from the value pointed by &lt;code>R12&lt;/code>:&lt;/p>
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb.png"
 width="710"
 height="393"
 srcset="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb_hu8706512429467717403.png 480w, https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb_hu13832824211967393421.png 1024w"
 loading="lazy"
+alt="GDB-peda view of the overflow"
 class="gallery-image"
 data-flex-grow="180"
 data-flex-basis="433px"
@@ -59,12 +60,13 @@ data-flex-basis="433px"
 &lt;/div>
 &lt;/div>&lt;p>Then, we can control the flow and if we change what is pointed by &lt;code>R12&lt;/code> to a pointer to a vulnerable code, we win.&lt;/p>
 &lt;p>Without reversing we already have a lot of information, but to validate our hypothesis we will have to open &lt;a class="link" href="https://ghidra-sre.org/" target="_blank" rel="noopener"
->Ghidra&lt;/a>. We quickly find that the code is in C++ (good news) and therefore there is a lot of garbage code. We start to focus on the &lt;code>Cat&lt;/code> structure (we can make the hypothesis that it&amp;rsquo;s a class) and find some interesting information using the structure editor of Ghidra:
-&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_cat.png"
+>Ghidra&lt;/a>. We quickly find that the code is in C++ (good news) and therefore there is a lot of garbage code. We start to focus on the &lt;code>Cat&lt;/code> structure (we can make the hypothesis that it&amp;rsquo;s a class) and find some interesting information using the structure editor of Ghidra:&lt;/p>
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_cat.png"
 width="1920"
 height="853"
 srcset="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_cat_hu4184377463417184320.png 480w, https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_cat_hu16846859746573167829.png 1024w"
 loading="lazy"
+alt="Reverse of the Cat structure"
 class="gallery-image"
 data-flex-grow="225"
 data-flex-basis="540px"
@@ -83,12 +85,13 @@ data-flex-basis="540px"
 loading="lazy"
 >&lt;/p>
 &lt;p>If you want to delve deeper into the subject, a good reference is available here: &lt;a class="link" href="http://phrack.org/issues/56/8.html" target="_blank" rel="noopener"
->SMASHING C++ VPTRS&lt;/a>. We can see the &lt;code>vtable&lt;/code> in &lt;code>gdb&lt;/code>:
-&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb_vtable.png"
+>SMASHING C++ VPTRS&lt;/a>. We can see the &lt;code>vtable&lt;/code> in &lt;code>gdb&lt;/code>:&lt;/p>
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb_vtable.png"
 width="553"
 height="113"
 srcset="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb_vtable_hu3039902341472932292.png 480w, https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb_vtable_hu16232290348715886771.png 1024w"
 loading="lazy"
+alt="Vtable view in gdb"
 class="gallery-image"
 data-flex-grow="489"
 data-flex-basis="1174px"
@@ -115,22 +118,24 @@ data-flex-basis="1174px"
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RELRO : Partial
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>That&amp;rsquo;s good, we can use both techniques without issue (we don&amp;rsquo;t have to deal with any canaries for this buffer overflow). Now let&amp;rsquo;s find the offset to control &lt;code>R12&lt;/code>:
-&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb_overflow.png"
+&lt;/div>&lt;p>That&amp;rsquo;s good, we can use both techniques without issue (we don&amp;rsquo;t have to deal with any canaries for this buffer overflow). Now let&amp;rsquo;s find the offset to control &lt;code>R12&lt;/code>:&lt;/p>
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb_overflow.png"
 width="1497"
 height="822"
 srcset="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb_overflow_hu15748584287749392896.png 480w, https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb_overflow_hu7314462433896868516.png 1024w"
 loading="lazy"
+alt="GDB view of the R12 overflow and offset"
 class="gallery-image"
 data-flex-grow="182"
 data-flex-basis="437px"
 >&lt;/p>
-&lt;p>The offset is &lt;code>64 (name) + 8 (padding)&lt;/code> to control what is pointed by &lt;code>R12&lt;/code> and therefore &lt;code>RAX&lt;/code>. We can now search for a vulnerable function in Ghidra by searching for a reference to &lt;code>flag.txt&lt;/code> (CTF classic):
-&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_vuln_fn.png"
+&lt;p>The offset is &lt;code>64 (name) + 8 (padding)&lt;/code> to control what is pointed by &lt;code>R12&lt;/code> and therefore &lt;code>RAX&lt;/code>. We can now search for a vulnerable function in Ghidra by searching for a reference to &lt;code>flag.txt&lt;/code> (CTF classic):&lt;/p>
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_vuln_fn.png"
 width="1920"
 height="899"
 srcset="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_vuln_fn_hu2490150719442754621.png 480w, https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_vuln_fn_hu15584830361623015374.png 1024w"
 loading="lazy"
+alt="Ghidra disassembly of a function containing the flag"
 class="gallery-image"
 data-flex-grow="213"
 data-flex-basis="512px"
@@ -166,16 +171,24 @@ data-flex-basis="512px"
 &lt;li>We can make an exploit using &lt;code>C - Pet a cat&lt;/code> that will call the &lt;code>pet&lt;/code> virtual function. This implies using the &lt;code>vtable&lt;/code> of the &lt;code>HackerCat&lt;/code> class to be able to call the &lt;code>HackerCat::pet&lt;/code> win function.&lt;/li>
 &lt;li>We can use &lt;code>A - List all cats&lt;/code> that call another virtual function. This implies replacing a virtual function address with &lt;code>HackerCat::pet&lt;/code>.&lt;/li>
 &lt;/ul>
-&lt;p>In a diagram this translates to (we find at the top the initial situations, and at the bottom the corresponding exploitation path):
-&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/exploits.svg"
+&lt;p>In a diagram this translates to (we find at the top the initial situations, and at the bottom the corresponding exploitation path):&lt;/p>
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/exploits.png"
+width="2602"
+height="1612"
+srcset="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/exploits_hu7762404696403929869.png 480w, https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/exploits_hu12953671290167194003.png 1024w"
 loading="lazy"
+alt="Possible exploitation paths, one per column"
+class="gallery-image"
+data-flex-grow="161"
+data-flex-basis="387px"
 >&lt;/p>
-&lt;p>Both options are good, but let&amp;rsquo;s take the second option that is simpler to debug. Let&amp;rsquo;s retrieve the &lt;code>vtable&lt;/code> address of &lt;code>HackerCat&lt;/code> and the address of the pointer to &lt;code>HackerCat::pet&lt;/code> in the same table:
-&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_vtable.png"
+&lt;p>Both options are good, but let&amp;rsquo;s take the second option that is simpler to debug. Let&amp;rsquo;s retrieve the &lt;code>vtable&lt;/code> address of &lt;code>HackerCat&lt;/code> and the address of the pointer to &lt;code>HackerCat::pet&lt;/code> in the same table:&lt;/p>
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_vtable.png"
 width="1874"
 height="732"
 srcset="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_vtable_hu8906840068822777921.png 480w, https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_vtable_hu12052454263659261997.png 1024w"
 loading="lazy"
+alt="Show the vtable of HackerCat in Ghidra"
 class="gallery-image"
 data-flex-grow="256"
 data-flex-basis="614px"
