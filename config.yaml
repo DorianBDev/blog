@@ -67,8 +67,8 @@ params:
             default: Licensed under CC BY-NC-SA 4.0
 
     comments:
-        enabled: false
-        provider: disqus
+        enabled: true
+        provider: giscus
 
         disqusjs:
             shortname:
@@ -123,15 +123,18 @@ params:
             siteName: "" # You must insert a unique identifier here matching the one you registered (See https://cactus.chat/docs/getting-started/quick-start/#register-your-site)
 
         giscus:
-            repo:
-            repoID:
-            category:
-            categoryID:
-            mapping:
-            lightTheme:
-            darkTheme:
+            repo: DorianBDev/blog
+            repoID: R_kgDOHqETOg
+            category: Comments
+            categoryID: DIC_kwDOHqETOs4Ci_rr
+            mapping: pathname
+            strict: 1
+            lightTheme: noborder_light
+            darkTheme: noborder_dark
             reactionsEnabled: 1
             emitMetadata: 0
+            inputPosition: top
+            lang: en
 
         gitalk:
             owner:
@@ -197,6 +200,58 @@ menu:
           params:
             icon: arrow-back
             newTab: false
+
+    # For more icons see https://tablericons.com/ and place in theme/custom/assets/icons
+    social:
+        - identifier: linkedin
+          name: Linkedin
+          url: https://www.linkedin.com/in/dorian-bachelot/
+          weight: 1
+          params:
+            icon: brand-linkedin
+
+        - identifier: github
+          name: GitHub
+          url: https://github.com/DorianBDev
+          weight: 2
+          params:
+            icon: brand-github
+
+        - identifier: gitlab
+          name: Gitlab
+          url: https://gitlab.com/DorianBDev
+          weight: 3
+          params:
+            icon: brand-gitlab
+
+        - identifier: twitter
+          name: Twitter
+          url: https://x.com/dorianbchlt
+          weight: 4
+          params:
+            icon: brand-twitter
+
+        - identifier: rootme
+          name: RootMe
+          url: https://www.root-me.org/dorianbdev
+          weight: 5
+          params:
+            icon: brand-rootme
+
+        - identifier: hackthebox
+          name: Hack The Box
+          url: https://app.hackthebox.com/profile/880964
+          weight: 6
+          params:
+            icon: brand-htb
+
+        - identifier: rss
+          name: Rss Feed
+          url: https://dorianb.net/blog/index.xml
+          weight: 7
+          params:
+            icon: brand-rss
+
 
 related:
     includeNewer: true
