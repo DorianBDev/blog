@@ -12,7 +12,7 @@ toc: false
 tags:
   - reverse
 categories:
-  - writeup
+  - write-up
 ---
 
 This post was written in 2022, but I had never posted it by accident. Published in October 2024.
