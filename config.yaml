@@ -40,7 +40,7 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon:
+    favicon: favicon.ico
 
     footer:
         since: 2022
@@ -59,6 +59,7 @@ params:
             src: https://avatars.githubusercontent.com/u/20194872?s=400&u=985e4b2550b35686b0be0900b145e2740b235265&v=4
 
     article:
+        headingAnchor: false
         math: true
         toc: true
         readingTime: true
@@ -275,7 +276,7 @@ markup:
     tableOfContents:
         endLevel: 4
         ordered: true
-        startLevel: 2
+        startLevel: 1
     highlight:
         noClasses: false
         codeFences: true

@@ -33,3 +33,15 @@
     font-weight: bold;
   }
 }
+
+.todo{
+  opacity: 0.5;
+  font-style: italic;
+  padding-left: 30px;
+  &:before{
+    content: "TODO: ";
+    font-weight: bold;
+    /* color: #663399; */
+  }
+}
+
