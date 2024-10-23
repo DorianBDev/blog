@@ -22,3 +22,71 @@
       RSS-feed
     </a>
 </footer>
+
+<!-- Stars CSS -->
+<style>
+    .star{display: block; background-color: #fff; position: absolute; border-radius: 100%; animation-timing-function: linear; animation-iteration-count: infinite;}
+
+    @keyframes move_right {
+       from { transform: rotate(0deg) translateX(8px) rotate(0deg); }
+        to   { transform: rotate(360deg) translateX(8px) rotate(-360deg); }
+    }
+
+    @keyframes move_left {
+       from { transform: rotate(0deg) translateX(8px) rotate(0deg); }
+        to   { transform: rotate(-360deg) translateX(8px) rotate(360deg); }
+    }
+</style>
+
+<!-- Stars code -->
+<script>
+    /**
+     * Generates a random number between a given range (min and max).
+     * @param {number} min - The minimum value for the random number.
+     * @param {number} max - The maximum value for the random number.
+     * @return {number} A random number between min and max (inclusive).
+     */
+    var randomNumber = function(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+
+    /**
+     * Holds the number of stars to be created.
+     */
+    var numberOfStars = randomNumber(350, 650);
+
+    /**
+     * Creates stars with random positions, sizes, and animation directions.
+     */
+    var createStars = function() {
+        /**
+         * Holds the initial star rotation direction.
+         */
+        var starRotation = 'move_right;';
+
+        var body = document.body,
+            html = document.documentElement;
+
+        var height = Math.max(body.scrollHeight, body.offsetHeight, 
+                              html.clientHeight, html.scrollHeight, html.offsetHeight);
+
+        // Loop through the number of stars to be created
+        for (var i = 0; i < numberOfStars; i++) {
+            // Switch the rotation direction for each star
+            var rotation = (starRotation === 'move_right;' ? 'move_left;' : 'move_right;');
+
+            // Generate random values for star's position, size, and animation duration
+            var starTop = randomNumber(0, height);
+            var starLeft = randomNumber(0, window.innerWidth);
+            var starRadius = randomNumber(0, 4);
+            var starDuration = randomNumber(6, 16);
+
+            // Create a new star with the generated values and add it to the body of the document
+            document.body.innerHTML += "<div class='star' style='top: " + starTop + "px; left: " + starLeft + "px; width: " + starRadius + "px; height: " + starRadius + "px; " +
+                "animation-name:" + rotation + "; animation-duration: " + starDuration + "s;z-index: -1;'></div>";
+        }
+    };
+
+    // Create stars
+    createStars();    
+</script>
