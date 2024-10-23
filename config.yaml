@@ -52,6 +52,7 @@ params:
 
     sidebar:
         emoji: 🐙
+        compact: true
         subtitle: Understand, don't memorize.
         avatar:
             enabled: true
