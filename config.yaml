@@ -4,16 +4,16 @@ theme:
     - custom
     - hugo-theme-stack
 paginate: 10
-title: Dorian B. Blog
+title: Dorian B.
 
 languages:
     en:
         languageName: English
-        title: Dorian B. Blog
+        title: Dorian B.
         weight: 1
     fr:
         languageName: Français
-        title: Dorian B. Blog
+        title: Dorian B.
         weight: 2
         disabled: true
 
