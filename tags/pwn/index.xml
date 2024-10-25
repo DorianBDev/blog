@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pwn on Dorian B.</title><link>https://dorianb.net/blog/tags/pwn/</link><description>Recent content in Pwn on Dorian B.</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 05 Nov 2022 10:00:00 +0200</lastBuildDate><atom:link href="https://dorianb.net/blog/tags/pwn/index.xml" rel="self" type="application/rss+xml"/><item><title>WPICTF 2022 - PWN - Calicovision</title><link>https://dorianb.net/blog/p/wpictf-2022-pwn-calicovision/</link><pubDate>Sat, 05 Nov 2022 10:00:00 +0200</pubDate><guid>https://dorianb.net/blog/p/wpictf-2022-pwn-calicovision/</guid><description>&lt;img src="https://dorianb.net/blog/p/wpictf-2022-pwn-calicovision/gdb_overflow.png" alt="Featured image of post WPICTF 2022 - PWN - Calicovision" />&lt;p class="note">This post was written in 2022, but I had never posted it by accident. Published in October 2024.&lt;/p>
-&lt;h1 id="introduction">Introduction
+&lt;h1 id="introduction">&lt;a href="#introduction" class="header-anchor">&lt;/a>Introduction
 &lt;/h1>&lt;p>To continue our previous post about the WPICTF 2022 (online, hosted by &lt;a class="link" href="https://wpictf.xyz/" target="_blank" rel="noopener"
 >Worcester Polytechnic Institute Cyber Security Club&lt;/a>), we will focus our attention on a pwn challenge. And to change, this time we&amp;rsquo;ll use &lt;a class="link" href="https://ghidra-sre.org/" target="_blank" rel="noopener"
 >Ghidra&lt;/a> rather than &lt;a class="link" href="https://cutter.re/" target="_blank" rel="noopener"
 >Cutter&lt;/a> 😎&lt;/p>
 &lt;p>A x64 ELF binary is provided with this challenge, no code is given.&lt;/p>
-&lt;h2 id="recon">Recon
+&lt;h2 id="recon">&lt;a href="#recon" class="header-anchor">&lt;/a>Recon
 &lt;/h2>&lt;p>We explore the terminal user interface (TUI) of the binary, and we find the potential buffer overflow in the &lt;code>B - Name a cat&lt;/code> submenu. Let&amp;rsquo;s try to get the offset with &lt;a class="link" href="https://github.com/longld/peda" target="_blank" rel="noopener"
 >gdb-peda&lt;/a>:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
