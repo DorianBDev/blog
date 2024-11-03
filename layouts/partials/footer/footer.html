@@ -93,17 +93,6 @@
     setTimeout( function() { createStars(); }, 10);
 </script>
 
-<style>
-/*
-* Print support, any class in this section will be removed when printing (e.g. to PDF).
-*/
-@media print {
-    .right-sidebar, .left-sidebar, .sidebar, .menu, .star, .site-footer, .article-tags, .article-category, .related-content--wrapper, .related-content, .article-footer, .article-time--reading, .footer, #print, #sidebars-control { display: none; }
-    .article-page .main-article { box-shadow: unset }
-}
-
-</style>
-
 <!-- Hook to add other information on the article header (not that dirty in fact :p) -->
 <script>
     if (document.getElementsByClassName("main-article").length != 0) {
@@ -124,6 +113,16 @@
                     <time class="article-time--published" style="margin-left: -5px;">Dorian BACHELOT</time>
                 </a>
             </div>`;
+
+            var oldScheme = document.documentElement.getAttribute("data-scheme");
+            window.onbeforeprint = function(){
+                oldScheme = document.documentElement.getAttribute("data-scheme");
+                document.documentElement.setAttribute("data-scheme", "light");
+            }
+
+            window.onafterprint = function(){
+                document.documentElement.setAttribute("data-scheme", oldScheme);
+            }
 
             header.innerHTML += `
             <div id="print"> 

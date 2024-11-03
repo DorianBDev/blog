@@ -48,4 +48,28 @@
 .article-content {
   text-justify: auto;
   text-align: justify;
+  print-color-adjust: economy;
+}
+
+.article-content td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.article-content th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.article-content .lntd {
+  text-justify: none;
+  text-align: start;
+}
+
+/*
+* Print support, any class in this section will be removed when printing (e.g. to PDF).
+*/
+@media print {
+    .right-sidebar, .left-sidebar, .sidebar, .menu, .star, .site-footer, .article-tags, .article-category, .related-content--wrapper, .related-content, .article-footer, .icon-tabler-clock, .article-time--reading, .footer, #print, #sidebars-control { display: none }
+    .article-page .main-article { box-shadow: unset }
 }
