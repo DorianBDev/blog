@@ -70,7 +70,7 @@
 * Print support, any class in this section will be removed when printing (e.g. to PDF).
 */
 @media print {
-    .right-sidebar, .left-sidebar, .sidebar, .menu, .star, .site-footer, .article-tags, .article-category, .related-content--wrapper, .related-content, .article-footer, .footer, #print, #sidebars-control { display: none }
+    .right-sidebar, .left-sidebar, .sidebar, .menu, .star, .site-footer, .article-tags, .article-category, .related-content--wrapper, .related-content, .article-footer, .footer, #print, #sidebars-control, .navigation-bar { display: none }
     .article-page .main-article { box-shadow: unset }
     body { zoom: 75%; }
     table, figure { page-break-inside: avoid; }
