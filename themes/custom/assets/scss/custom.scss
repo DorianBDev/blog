@@ -34,7 +34,7 @@
   }
 }
 
-.todo{
+.todo {
   opacity: 0.5;
   font-style: italic;
   padding-left: 30px;
@@ -43,6 +43,14 @@
     font-weight: bold;
     /* color: #663399; */
   }
+}
+
+.article-content .label {
+  margin-top: -15px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1.4rem;
+  color: var(--card-text-color-secondary);
 }
 
 .article-content {
@@ -64,6 +72,18 @@
 .article-content .lntd {
   text-justify: none;
   text-align: start;
+}
+
+details {
+  background: #2a2a2a;
+  border: 2px solid #4a4a4a;
+  padding: 0.5rem 1rem;
+  font-style: italic;
+}
+
+details[open] summary {
+  border-bottom: 1px solid #4a4a4a;
+  margin-bottom: 0.5em;
 }
 
 /*

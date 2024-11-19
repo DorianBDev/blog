@@ -118,6 +118,11 @@
             window.onbeforeprint = function(){
                 oldScheme = document.documentElement.getAttribute("data-scheme");
                 document.documentElement.setAttribute("data-scheme", "light");
+
+                // Open all details on print
+                [...document.querySelectorAll("details")].forEach(detail => {
+                    detail.setAttribute("open", true);
+                });
             }
 
             window.onafterprint = function(){
