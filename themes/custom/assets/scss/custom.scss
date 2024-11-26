@@ -12,7 +12,7 @@
 
 .warning {
   border-left-color: #ffbb00;
-  &:before{
+  &:before {
     content: "WARNING: ";
     font-weight: bold;
   }
@@ -20,7 +20,7 @@
 
 .note {
   border-left-color: var(--accent-color-darker);
-  &:before{
+  &:before {
     content: "NOTE: ";
     font-weight: bold;
   }
@@ -28,7 +28,7 @@
 
 .danger {
   border-left-color: #ee0000;
-  &:before{
+  &:before {
     content: "DANGER: ";
     font-weight: bold;
   }
@@ -38,7 +38,7 @@
   opacity: 0.5;
   font-style: italic;
   padding-left: 30px;
-  &:before{
+  &:before {
     content: "TODO: ";
     font-weight: bold;
     /* color: #663399; */
@@ -86,12 +86,72 @@ details[open] summary {
   margin-bottom: 0.5em;
 }
 
+.article-content blockquote:before {
+  display: block;
+  margin-bottom: -70px;
+  content: "\201C";
+  font-size: 80px;
+  color: #7a7a7a;
+}
+
+.article-content blockquote p {
+  display: block;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.article-content blockquote:after {
+  display: block;
+  margin-right: 30px;
+  content: "\201D";
+  font-size: 80px;
+  margin-bottom: -35px;
+  margin-top: -35px;
+  margin-right: -4px;
+  color: #7a7a7a;
+  text-align: end;
+}
+
+.article-content .block {
+  position: relative;
+  border-inline-start: var(--blockquote-border-size) solid
+    var(--card-separator-color);
+  padding: 15px calc(var(--card-padding) - var(--blockquote-border-size));
+  background-color: var(--blockquote-background-color);
+  margin-left: calc((var(--card-padding)) * -1);
+  margin-right: calc((var(--card-padding)) * -1);
+  width: calc(100% + var(--card-padding) * 2);
+}
+
 /*
 * Print support, any class in this section will be removed when printing (e.g. to PDF).
 */
 @media print {
-    .right-sidebar, .left-sidebar, .sidebar, .menu, .star, .site-footer, .article-tags, .article-category, .related-content--wrapper, .related-content, .article-footer, .footer, #print, #sidebars-control, .navigation-bar { display: none }
-    .article-page .main-article { box-shadow: unset }
-    body { zoom: 75%; }
-    table, figure { page-break-inside: avoid; }
+  .right-sidebar,
+  .left-sidebar,
+  .sidebar,
+  .menu,
+  .star,
+  .site-footer,
+  .article-tags,
+  .article-category,
+  .related-content--wrapper,
+  .related-content,
+  .article-footer,
+  .footer,
+  #print,
+  #sidebars-control,
+  .navigation-bar {
+    display: none;
+  }
+  .article-page .main-article {
+    box-shadow: unset;
+  }
+  body {
+    zoom: 75%;
+  }
+  table,
+  figure {
+    page-break-inside: avoid;
+  }
 }
