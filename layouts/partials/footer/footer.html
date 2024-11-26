@@ -1,111 +1,161 @@
 {{- $ThemeVersion := "3.27.0" -}}
 <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
-            {{ .Site.Params.footer.since }} - 
-        {{ end }}
-        {{ now.Format "2006" }} {{ default .Site.Title .Site.Copyright }}
-    </section>
-    
-    <section class="powerby">
-        {{ with .Site.Params.footer.customText }}
-            {{ . | safeHTML }} <br/>
-        {{ end }}
-    </section>
+  <section class="copyright">
+    &copy; {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since
+    (int (now.Format "2006"))) }} {{ .Site.Params.footer.since }} - {{ end }} {{
+    now.Format "2006" }} {{ default .Site.Title .Site.Copyright }}
+  </section>
 
-    <a href="https://dorianb.net/blog/index.xml" target="_blank" title="RSS feed" rel="me">
-        <svg  xmlns="http://www.w3.org/2000/svg"  width="15"  height="15"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-rss"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M4 4a16 16 0 0 1 16 16" /><path d="M4 11a9 9 0 0 1 9 9" /></svg>
-        RSS-feed
-    </a>
+  <section class="powerby">
+    {{ with .Site.Params.footer.customText }} {{ . | safeHTML }} <br />
+    {{ end }}
+  </section>
+
+  <a
+    href="https://dorianb.net/blog/index.xml"
+    target="_blank"
+    title="RSS feed"
+    rel="me"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="icon icon-tabler icons-tabler-outline icon-tabler-rss"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+      <path d="M4 4a16 16 0 0 1 16 16" />
+      <path d="M4 11a9 9 0 0 1 9 9" />
+    </svg>
+    RSS-feed
+  </a>
 </footer>
+
+<div id="stars"></div>
 
 <!-- Everything below is somewhat hacky way of customizing the page... -->
 
 <!-- Stars CSS -->
 <style>
-    .star{display: block; background-color: #fff; position: absolute; border-radius: 100%; animation-timing-function: linear; animation-iteration-count: infinite;}
+  .star {
+    display: block;
+    background-color: #fff;
+    position: absolute;
+    border-radius: 100%;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
 
-    @keyframes move_right {
-       from { transform: rotate(0deg) translateX(8px) rotate(0deg); }
-        to   { transform: rotate(360deg) translateX(8px) rotate(-360deg); }
+  @keyframes move_right {
+    from {
+      transform: rotate(0deg) translateX(8px) rotate(0deg);
     }
+    to {
+      transform: rotate(360deg) translateX(8px) rotate(-360deg);
+    }
+  }
 
-    @keyframes move_left {
-       from { transform: rotate(0deg) translateX(8px) rotate(0deg); }
-        to   { transform: rotate(-360deg) translateX(8px) rotate(360deg); }
+  @keyframes move_left {
+    from {
+      transform: rotate(0deg) translateX(8px) rotate(0deg);
     }
+    to {
+      transform: rotate(-360deg) translateX(8px) rotate(360deg);
+    }
+  }
 </style>
 
 <!-- Stars code -->
 <script>
+  /**
+   * Generates a random number between a given range (min and max).
+   * @param {number} min - The minimum value for the random number.
+   * @param {number} max - The maximum value for the random number.
+   * @return {number} A random number between min and max (inclusive).
+   */
+  var randomNumber = function (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  /**
+   * Creates stars with random positions, sizes, and animation directions.
+   */
+  var createStars = function () {
     /**
-     * Generates a random number between a given range (min and max).
-     * @param {number} min - The minimum value for the random number.
-     * @param {number} max - The maximum value for the random number.
-     * @return {number} A random number between min and max (inclusive).
+     * Holds the initial star rotation direction.
      */
-    var randomNumber = function(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
+    var starRotation = "move_right;";
 
-    /**
-     * Holds the number of stars to be created.
-     */
-    var numberOfStars = randomNumber(350, 650);
+    var body = document.body,
+      html = document.documentElement;
 
-    /**
-     * Creates stars with random positions, sizes, and animation directions.
-     */
-    var createStars = function() {
-        /**
-         * Holds the initial star rotation direction.
-         */
-        var starRotation = 'move_right;';
+    var height = Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight,
+    );
 
-        var body = document.body,
-            html = document.documentElement;
+    var numberOfStars = randomNumber(height / 10, height / 5);
 
-        var height = Math.max(body.scrollHeight, body.offsetHeight, 
-                              html.clientHeight, html.scrollHeight, html.offsetHeight);
+    // Loop through the number of stars to be created
+    var stars = "";
+    for (var i = 0; i < numberOfStars; i++) {
+      // Switch the rotation direction for each star
+      var rotation =
+        starRotation === "move_right;" ? "move_left;" : "move_right;";
 
-        // Loop through the number of stars to be created
-        var stars = "";
-        for (var i = 0; i < numberOfStars; i++) {
-            // Switch the rotation direction for each star
-            var rotation = (starRotation === 'move_right;' ? 'move_left;' : 'move_right;');
+      // Generate random values for star's position, size, and animation duration
+      var starTop = randomNumber(0, height);
+      var starLeft = randomNumber(0, window.innerWidth);
+      var starRadius = randomNumber(0, 4);
+      var starDuration = randomNumber(6, 16);
 
-            // Generate random values for star's position, size, and animation duration
-            var starTop = randomNumber(0, height);
-            var starLeft = randomNumber(0, window.innerWidth);
-            var starRadius = randomNumber(0, 4);
-            var starDuration = randomNumber(6, 16);
+      // Create a new star with the generated values and add it to the body of the document
+      stars +=
+        "<div class='star' style='top: " +
+        starTop +
+        "px; left: " +
+        starLeft +
+        "px; width: " +
+        starRadius +
+        "px; height: " +
+        starRadius +
+        "px; " +
+        "animation-name:" +
+        rotation +
+        "; animation-duration: " +
+        starDuration +
+        "s;z-index: -1;'></div>";
+    }
 
-            // Create a new star with the generated values and add it to the body of the document
-            stars += "<div class='star' style='top: " + starTop + "px; left: " + starLeft + "px; width: " + starRadius + "px; height: " + starRadius + "px; " +
-                "animation-name:" + rotation + "; animation-duration: " + starDuration + "s;z-index: -1;'></div>";
-        }
-        document.body.innerHTML += "<div id='stars'>" + stars + "</div>";
-    };
+    document.getElementById("stars").innerHTML += stars;
+  };
 
-    // Create stars
-    // The timer is needed to let PhotoSwipe load itself
-    setTimeout( function() { createStars(); }, 10);
+  // Create stars
+  createStars();
 </script>
 
 <!-- Hook to add other information on the article header (not that dirty in fact :p) -->
 <script>
-    if (document.getElementsByClassName("main-article").length != 0) {
+  if (document.getElementsByClassName("main-article").length != 0) {
+    // This can fail, if on main page for example
+    var article_header = document.getElementsByClassName("article-time"); // article-time is the article header class
 
-        // This can fail, if on main page for example
-        var article_header = document.getElementsByClassName("article-time"); // article-time is the article header class
+    // Check if there is the article header
+    if (article_header.length == 1) {
+      // This is safe, and we focus only on the first
+      var header = article_header[0];
 
-        // Check if there is the article header
-        if (article_header.length == 1) {
-            // This is safe, and we focus only on the first 
-            var header = article_header[0];
-
-            header.innerHTML += `
+      header.innerHTML += `
             <div> 
                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-feather"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20l10 -10m0 -5v5h5m-9 -1v5h5m-9 -1v5h5m-5 -5l4 -4l4 -4" /><path d="M19 10c.638 -.636 1 -1.515 1 -2.486a3.515 3.515 0 0 0 -3.517 -3.514c-.97 0 -1.847 .367 -2.483 1m-3 13l4 -4l4 -4" /></svg>
 
@@ -114,22 +164,22 @@
                 </a>
             </div>`;
 
-            var oldScheme = document.documentElement.getAttribute("data-scheme");
-            window.onbeforeprint = function(){
-                oldScheme = document.documentElement.getAttribute("data-scheme");
-                document.documentElement.setAttribute("data-scheme", "light");
+      var oldScheme = document.documentElement.getAttribute("data-scheme");
+      window.onbeforeprint = function () {
+        oldScheme = document.documentElement.getAttribute("data-scheme");
+        document.documentElement.setAttribute("data-scheme", "light");
 
-                // Open all details on print
-                [...document.querySelectorAll("details")].forEach(detail => {
-                    detail.setAttribute("open", true);
-                });
-            }
+        // Open all details on print
+        [...document.querySelectorAll("details")].forEach((detail) => {
+          detail.setAttribute("open", true);
+        });
+      };
 
-            window.onafterprint = function(){
-                document.documentElement.setAttribute("data-scheme", oldScheme);
-            }
+      window.onafterprint = function () {
+        document.documentElement.setAttribute("data-scheme", oldScheme);
+      };
 
-            header.innerHTML += `
+      header.innerHTML += `
             <div id="print"> 
                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-printer"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>
 
@@ -138,54 +188,54 @@
                 </a>
             </div>`;
 
-            var sidebars = document.getElementsByClassName('left-sidebar');
+      var sidebars = document.getElementsByClassName("left-sidebar");
 
-            var hideSidebar = function() {
-                if (sidebars.length > 0) {
-                    // The first sidebar will awlays be the main sidebar
-                    var sidebar = sidebars[0];
+      var hideSidebar = function () {
+        if (sidebars.length > 0) {
+          // The first sidebar will awlays be the main sidebar
+          var sidebar = sidebars[0];
 
-                    // Togle sidebar
-                    if (sidebar.style.display != 'none') {
-                        sidebar.style.display = 'none';
-                    } else {
-                        sidebar.style.display = 'flex';
-                    }
-                }
-            }
+          // Togle sidebar
+          if (sidebar.style.display != "none") {
+            sidebar.style.display = "none";
+          } else {
+            sidebar.style.display = "flex";
+          }
+        }
+      };
 
-            if (sidebars.length > 0) {
-                header.innerHTML += `
+      if (sidebars.length > 0) {
+        header.innerHTML += `
                 <div id="sidebars-control"> 
                     <a href="javascript:void('Hide sidebar')" onclick="hideSidebar()">
                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-layout-sidebar-left-collapse"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 3a3 3 0 0 1 2.995 2.824l.005 .176v12a3 3 0 0 1 -2.824 2.995l-.176 .005h-12a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-12a3 3 0 0 1 2.824 -2.995l.176 -.005h12zm0 2h-9v14h9a1 1 0 0 0 .993 -.883l.007 -.117v-12a1 1 0 0 0 -.883 -.993l-.117 -.007zm-2.293 4.293a1 1 0 0 1 .083 1.32l-.083 .094l-1.292 1.293l1.292 1.293a1 1 0 0 1 .083 1.32l-.083 .094a1 1 0 0 1 -1.32 .083l-.094 -.083l-2 -2a1 1 0 0 1 -.083 -1.32l.083 -.094l2 -2a1 1 0 0 1 1.414 0z" /></svg>
                     </a>
                 </div>`;
-            }
+      }
 
-            var toc = document.getElementsByClassName('right-sidebar');
-            var hideTOC = function() {
-                if (toc.length > 0) {
-                    // The first sidebar will awlays be the main toc
-                    var sidebar = toc[0];
+      var toc = document.getElementsByClassName("right-sidebar");
+      var hideTOC = function () {
+        if (toc.length > 0) {
+          // The first sidebar will awlays be the main toc
+          var sidebar = toc[0];
 
-                    // Togle sidebar
-                    if (sidebar.style.display != 'none') {
-                        sidebar.style.display = 'none';
-                    } else {
-                        sidebar.style.display = 'flex';
-                    }
-                }
-            }
+          // Togle sidebar
+          if (sidebar.style.display != "none") {
+            sidebar.style.display = "none";
+          } else {
+            sidebar.style.display = "flex";
+          }
+        }
+      };
 
-            if (toc.length > 0) {
-                header.innerHTML += `
+      if (toc.length > 0) {
+        header.innerHTML += `
                 <div id="sidebars-control" style="margin-left: -15px;"> 
                     <a href="javascript:void('Hide TOC')" onclick="hideTOC()">
                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-layout-sidebar-right-collapse"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 3a3 3 0 0 1 2.995 2.824l.005 .176v12a3 3 0 0 1 -2.824 2.995l-.176 .005h-12a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-12a3 3 0 0 1 2.824 -2.995l.176 -.005h12zm-3 2h-9a1 1 0 0 0 -.993 .883l-.007 .117v12a1 1 0 0 0 .883 .993l.117 .007h9v-14zm-5.387 4.21l.094 .083l2 2a1 1 0 0 1 .083 1.32l-.083 .094l-2 2a1 1 0 0 1 -1.497 -1.32l.083 -.094l1.292 -1.293l-1.292 -1.293a1 1 0 0 1 -.083 -1.32l.083 -.094a1 1 0 0 1 1.32 -.083z" /></svg>
                     </a>
                 </div>`;
-            }
-        }
+      }
     }
+  }
 </script>
