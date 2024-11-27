@@ -1,0 +1,26 @@
+{{- $url := .Get "url" -}} 
+{{- $title := .Get "title" -}} 
+{{- $open := .Get "open" -}} 
+{{- $source := .Get "source" -}} 
+
+{{ with resources.GetRemote $url }} 
+  {{ with .Err }} 
+      {{ errorf "%s" . }} 
+    {{ else }} 
+      {{ $lang := path.Ext $url | strings.TrimPrefix "." }}
+      <details {{ if $open | default true | ne false }} open{{ end }} style="">
+        <summary>
+          <div class="title"><i class="fa-solid fa-code"></i>&nbsp;&nbsp;{{ $title }}</div>
+          {{ if $source }}
+            <div style="text-align: right; margin-right: 10px" class="additional">
+              <a style="border: solid 1px #525252; border-radius: 25px; padding: 2px 8px 2px 8px;" href="{{ $source }}">Source</a>
+            </div>
+          {{ end }}
+        </summary>
+
+        <p style="margin: 0px; padding: 0px;">{{ highlight .Content $lang }}</p>
+      </details>
+    {{ end }} 
+  {{ else }} 
+    {{ errorf "Unable to get remote resource." }} 
+{{ end }}

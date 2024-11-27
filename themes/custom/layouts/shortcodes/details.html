@@ -12,6 +12,7 @@
 {{- $iconMap  = dict "bug" "fas fa-bug fa-fw" | merge $iconMap -}}
 {{- $iconMap  = dict "example" "fas fa-list-ol fa-fw" | merge $iconMap -}}
 {{- $iconMap  = dict "quote" "fas fa-quote-right fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "code" "fas fa-solid fa-code" | merge $iconMap -}}
 
 {{- $colorMap := dict "note" "#bdc3c7" -}}
 {{- $colorMap  = dict "abstract" "#bdc3c7" | merge $colorMap -}}
@@ -25,11 +26,12 @@
 {{- $colorMap  = dict "bug" "#ee0000" | merge $colorMap -}}
 {{- $colorMap  = dict "example" "#bdc3c7" | merge $colorMap -}}
 {{- $colorMap  = dict "quote" "#bdc3c7" | merge $colorMap -}}
+{{- $colorMap  = dict "code" "#bdc3c7" | merge $colorMap -}}
 
 {{- $type := .Get "type" | default "note" -}}
 {{- $inner := .Inner | .Page.RenderString -}}
 {{- $color := index $colorMap $type | default (index $colorMap "note") -}}
 <details {{ if .Get `open` | default true | ne false }} open{{ end }} style="border-left-color: {{- $color -}};">
-  <summary><i style="color: {{- $color -}};" class="{{ index $iconMap $type | default (index $iconMap "note") }}"></i>&nbsp;&nbsp;{{ .Get "title" }}</summary>
-  <p>{{- $inner -}}</p>
+  <summary><div class="title"><i style="color: {{- $color -}};" class="{{ index $iconMap $type | default (index $iconMap "note") }}"></i>&nbsp;&nbsp;{{ .Get "title" }}</div></summary>
+  <p style="margin-top: -15px;">{{- $inner -}}</p>
 </details>

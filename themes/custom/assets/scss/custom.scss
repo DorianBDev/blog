@@ -93,25 +93,35 @@ summary {
   /* background: #2f3d55; */
   background: #2e2e2e;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
   padding: 5px 10px 5px 10px;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+summary .title {
+  width: 100%;
 }
 
 details[open] summary {
   border-bottom: 1px solid #4a4a4a;
-  margin-bottom: 0.5em;
+}
+
+details summary .additional {
+  display: none;
+}
+
+details[open] summary .additional {
+  display: inline-block;
 }
 
 summary::after {
   content: "▶";
-  margin-left: auto;
+  text-align: right;
 }
 details[open] summary:after {
   content: "▼";
-  margin-left: auto;
+  text-align: right;
 }
 
 details > summary {
@@ -120,7 +130,7 @@ details > summary {
 
 details p {
   padding: 1rem 1rem;
-  margin-top: -5px;
+  margin: 0px;
 }
 
 .article-content details .highlight {
