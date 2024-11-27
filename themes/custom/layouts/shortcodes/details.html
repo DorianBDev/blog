@@ -32,6 +32,12 @@
 {{- $inner := .Inner | .Page.RenderString -}}
 {{- $color := index $colorMap $type | default (index $colorMap "note") -}}
 <details {{ if .Get `open` | default true | ne false }} open{{ end }} style="border-left-color: {{- $color -}};">
-  <summary><div class="title"><i style="color: {{- $color -}};" class="{{ index $iconMap $type | default (index $iconMap "note") }}"></i>&nbsp;&nbsp;{{ .Get "title" }}</div></summary>
-  <p style="margin-top: -15px;">{{- $inner -}}</p>
+  <summary>
+    <div class="title">
+      <i style="color: {{- $color -}};" class="{{ index $iconMap $type | default (index $iconMap "note") }}"></i>
+      &nbsp;&nbsp;
+      {{ .Get "title" }}
+      </div>
+    </summary>
+  <p>{{- $inner -}}</p>
 </details>

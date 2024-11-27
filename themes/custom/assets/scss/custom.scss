@@ -179,6 +179,10 @@ summary::-webkit-details-marker {
   width: calc(100% + var(--card-padding) * 2);
 }
 
+[data-scheme="light"] .article-content .mermaid {
+  background-color: #222222;
+}
+
 /*
 * Print support, any class in this section will be removed when printing (e.g. to PDF).
 */
@@ -197,6 +201,7 @@ summary::-webkit-details-marker {
   .footer,
   .giscus,
   .no-print,
+  #stars,
   #print,
   #sidebars-control,
   .navigation-bar {
@@ -208,8 +213,14 @@ summary::-webkit-details-marker {
   body {
     zoom: 75%;
   }
+  blockquote,
   table,
   figure {
     page-break-inside: avoid;
+  }
+  .mermaid {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
   }
 }
