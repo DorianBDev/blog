@@ -8,7 +8,7 @@
       {{ errorf "%s" . }} 
     {{ else }} 
       {{ $lang := path.Ext $url | strings.TrimPrefix "." }}
-      <details {{ if $open | default true | ne false }} open{{ end }} style="">
+      <details {{ if $open | default true | ne false }} open{{ end }} class="no-print">
         <summary>
           <div class="title"><i class="fa-solid fa-code"></i>&nbsp;&nbsp;{{ $title }}</div>
           {{ if $source }}

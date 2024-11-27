@@ -2,7 +2,7 @@
 {{- $title:= .Get "title" -}}
 
 {{ if $title }}
-    <details {{ if $open | default true | ne false }} open{{ end }} style="">
+    <details {{ if $open | default true | ne false }} open{{ end }} class="no-print">
       <summary><div class="title"><i class="fa-regular fa-file-pdf"></i>&nbsp;&nbsp;{{ $title }}</div></summary>
       <p style="margin: 0px; padding: 0px;">
         <object class="pdf" data="{{ .Get "url" }}" width="100%" height="1000"></object>
