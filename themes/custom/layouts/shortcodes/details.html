@@ -1,0 +1,35 @@
+<!-- Inspired from https://github.com/dillonzq/LoveIt/blob/e9e89a4613baee823596822b7d246f5931263491/layouts/shortcodes/admonition.html -->
+
+{{- $iconMap := dict "note" "fas fa-pencil-alt fa-fw" -}}
+{{- $iconMap  = dict "abstract" "fas fa-list-ul fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "info" "fas fa-info-circle fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "tip" "fas fa-lightbulb fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "success" "fas fa-check-circle fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "question" "fas fa-question-circle fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "warning" "fas fa-exclamation-triangle fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "failure" "fas fa-times-circle fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "danger" "fas fa-skull-crossbones fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "bug" "fas fa-bug fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "example" "fas fa-list-ol fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "quote" "fas fa-quote-right fa-fw" | merge $iconMap -}}
+
+{{- $colorMap := dict "note" "#bdc3c7" -}}
+{{- $colorMap  = dict "abstract" "#bdc3c7" | merge $colorMap -}}
+{{- $colorMap  = dict "info" "#bdc3c7" | merge $colorMap -}}
+{{- $colorMap  = dict "tip" "#bdc3c7" | merge $colorMap -}}
+{{- $colorMap  = dict "success" "#bdc3c7" | merge $colorMap -}}
+{{- $colorMap  = dict "question" "#bdc3c7" | merge $colorMap -}}
+{{- $colorMap  = dict "warning" "#ffbb00" | merge $colorMap -}}
+{{- $colorMap  = dict "failure" "#ee0000" | merge $colorMap -}}
+{{- $colorMap  = dict "danger" "#ee0000" | merge $colorMap -}}
+{{- $colorMap  = dict "bug" "#ee0000" | merge $colorMap -}}
+{{- $colorMap  = dict "example" "#bdc3c7" | merge $colorMap -}}
+{{- $colorMap  = dict "quote" "#bdc3c7" | merge $colorMap -}}
+
+{{- $type := .Get "type" | default "note" -}}
+{{- $inner := .Inner | .Page.RenderString -}}
+{{- $color := index $colorMap $type | default (index $colorMap "note") -}}
+<details {{ if .Get `open` | default true | ne false }} open{{ end }} style="border-left-color: {{- $color -}};">
+  <summary><i style="color: {{- $color -}};" class="{{ index $iconMap $type | default (index $iconMap "note") }}"></i>&nbsp;&nbsp;{{ .Get "title" }}</summary>
+  <p>{{- $inner -}}</p>
+</details>
