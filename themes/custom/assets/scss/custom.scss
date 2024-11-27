@@ -76,7 +76,8 @@
 
 details {
   /* background: var(--body-background); */
-  background: #222222;
+  background: #111111;
+  /* background: #222222; */
   /* background: #2c3442; */
   border-left-style: solid;
   border-left-width: 0.4rem;
@@ -120,6 +121,11 @@ details > summary {
 details p {
   padding: 1rem 1rem;
   margin-top: -5px;
+}
+
+.article-content details .highlight {
+  width: 100%;
+  margin: 0px;
 }
 
 summary::-webkit-details-marker {
