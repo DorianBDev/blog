@@ -3,7 +3,8 @@ languageCode: en-us
 theme:
     - custom
     - hugo-theme-stack
-paginate: 10
+pagination:
+    pagerSize: 10
 title: Dorian B.
 
 languages:
@@ -194,14 +195,14 @@ params:
 ### See https://docs.stack.jimmycai.com/configuration/custom-menu.html
 ### To remove about, archive and search page menu item, remove `menu` field from their FrontMatter
 menu:
-    # main:
-        # - identifier: website
-        #   name: dorianb.net
-        #   url: https://dorianb.net
-        #   weight: 1000
-        #   params:
-        #     icon: arrow-back
-        #     newTab: false
+    main:
+      - identifier: website
+        name: About
+        url: https://dorianb.net
+        weight: 1000
+        params:
+          icon: arrow-back
+          newTab: false
 
     # For more icons see https://tablericons.com/ and place in theme/custom/assets/icons
     social:
