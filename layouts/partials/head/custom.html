@@ -5,12 +5,12 @@
   }
 
   .navigation-bar ul {
-      cursor: default;
-      list-style: none;
-      padding-left: 0;
-      justify-content: right;
-      display: flex;
-      overflow-x: visible;
+    cursor: default;
+    list-style: none;
+    padding-left: 0;
+    justify-content: right;
+    display: flex;
+    overflow-x: visible;
   }
 
   .navigation-bar li.icon a {
@@ -22,60 +22,68 @@
     display: inline;
     float: left;
     justify-content: center;
-    font-weight: bold;    
+    font-weight: bold;
     color: white;
   }
 
   .navigation-bar li.icon a:hover {
-      background-color: grey;
+    background-color: grey;
   }
 
   .navigation-bar li.icon a span {
-      margin-right: 5px;
+    margin-right: 5px;
   }
 </style>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type='text/css'>
-
 <div class="navigation-bar">
-
   <!-- Navigation -->
   <ul>
+    <!-- Home -->
+    <li class="icon">
+      <a href="https://dorianb.net">
+        <span class="fa fa-home"></span>
+        Home
+      </a>
+    </li>
 
-      <!-- Home -->
-      <li class="icon">
-          <a href="https://dorianb.net">
-              <span class="fa fa-home"></span>
-              Home
-          </a>
-      </li>
+    <!-- Blog -->
+    <li class="icon">
+      <a href="https://dorianb.net/blog">
+        <span class="fa fa-book"></span>
+        Blog
+      </a>
+    </li>
 
-      <!-- Blog -->
-      <li class="icon">
-          <a href="https://dorianb.net/blog">
-              <span class="fa fa-book"></span>
-              Blog
-          </a>
-      </li>
+    <!-- Talks -->
+    <li class="icon">
+      <a href="https://dorianb.net/talks">
+        <span class="fa fa-solid fa-comment"></span>
+        Talks
+      </a>
+    </li>
 
-      <!-- Degate -->
-      <li class="icon">
-          <a href="https://www.degate.org">
-          <span style="display: flex;justify-content: center;align-items: center;">
-              <img style="width:20px;height:auto;" src="https://raw.githubusercontent.com/DegateCommunity/Degate/refs/heads/develop/res/degate_logo.png" alt="Degate">
-               &nbsp; Degate
-          </span>
-          </a>
-      </li>
+    <!-- Degate -->
+    <li class="icon">
+      <a href="https://www.degate.org">
+        <span
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <img
+            style="width: 20px; height: auto"
+            src="https://raw.githubusercontent.com/DegateCommunity/Degate/refs/heads/develop/res/degate_logo.png"
+            alt="Degate"
+          />
+          &nbsp; Degate
+        </span>
+      </a>
+    </li>
 
-      <!-- Toolbox -->
-      <li class="icon">
-          <a href="https://dorianb.net/toolbox">
-              <span class="fa fa-archive"></span>
-              Toolbox
-          </a>
-      </li>
-
+    <!-- Toolbox -->
+    <li class="icon">
+      <a href="https://dorianb.net/toolbox">
+        <span class="fa fa-archive"></span>
+        Toolbox
+      </a>
+    </li>
   </ul>
-
 </div>
