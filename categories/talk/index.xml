@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Talk on Dorian B.</title><link>https://dorianb.net/blog/categories/talk/</link><description>Recent content in Talk on Dorian B.</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 03 Dec 2024 12:00:00 +0200</lastBuildDate><atom:link href="https://dorianb.net/blog/categories/talk/index.xml" rel="self" type="application/rss+xml"/><item><title>My Talk About Silicon Chips Reverse Engineering and Degate</title><link>https://dorianb.net/blog/p/my-talk-about-silicon-chips-reverse-engineering-and-degate/</link><pubDate>Tue, 03 Dec 2024 12:00:00 +0200</pubDate><guid>https://dorianb.net/blog/p/my-talk-about-silicon-chips-reverse-engineering-and-degate/</guid><description>&lt;img src="https://dorianb.net/blog/p/my-talk-about-silicon-chips-reverse-engineering-and-degate/image.png" alt="Featured image of post My Talk About Silicon Chips Reverse Engineering and Degate" />&lt;p class="note">Talk PDF and sources are available &lt;a class="link" href="https://dorianb.net/talks/Degate2024/" target="_blank" rel="noopener"
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Talk on Dorian B.</title><link>https://dorianb.net/blog/categories/talk/</link><description>Recent content in Talk on Dorian B.</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 03 Dec 2024 12:00:00 +0200</lastBuildDate><atom:link href="https://dorianb.net/blog/categories/talk/index.xml" rel="self" type="application/rss+xml"/><item><title>My Talk About Silicon Chips Reverse Engineering and Degate</title><link>https://dorianb.net/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/</link><pubDate>Tue, 03 Dec 2024 12:00:00 +0200</pubDate><guid>https://dorianb.net/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/</guid><description>&lt;img src="https://dorianb.net/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/image.png" alt="Featured image of post My Talk About Silicon Chips Reverse Engineering and Degate" />&lt;p class="note">Talk PDF and sources are available &lt;a class="link" href="https://dorianb.net/talks/Degate2024/" target="_blank" rel="noopener"
 >here&lt;/a>, and are under CC0 (Public Domain) license.&lt;/p>
 &lt;p class="warning">My work on silicon chips reverse engineering or Degate is a hobby, and doesn&amp;rsquo;t constitute my main area of expertise, and is not related to what I do professionally (mostly malware development/analysis). Everything here was done in my spare time.&lt;/p>
 &lt;h1 id="introduction">&lt;a href="#introduction" class="header-anchor">&lt;/a>Introduction
@@ -31,7 +31,7 @@ SecSea2k24: milestone, crit, m4, 2024-10-12, 0d
 &lt;li>Algorithm retrieval with an additional analysis step, when the netlist is too big or too complex to be exploited directly.&lt;/li>
 &lt;/ol>
 &lt;p>The image below is summarizing that process:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/my-talk-about-silicon-chips-reverse-engineering-and-degate/sre.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/sre.png"
 width="1237"
 height="682"
 loading="lazy"
@@ -42,7 +42,7 @@ data-flex-basis="435px"
 >&lt;/p>
 &lt;p>To perform that process, we first need to capture the chip, this passes by decapsulation, the selection of an area of interest, delayering, cleaning and stitching. Then, we have to analyze each specific gate layout to build our gate library, starting with transistors. Using pattern matching, we can then use that library to retrieve all other gate instances. After that, we need to trace the wires and vias to connect together all the identified gates, inputs and outputs. Which will give us, after having described each gate in an HDL language, the full netlist. We can simulate that netlist to start spotting errors in the analysis. And, if the netlist is huge, we can use automated processes and methods to extract the underlying algorithm, discover specification and build a software emulator.&lt;/p>
 &lt;p>The below image present an example of a logic gate analysis:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/my-talk-about-silicon-chips-reverse-engineering-and-degate/example.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/example.png"
 width="1819"
 height="818"
 loading="lazy"
@@ -56,7 +56,7 @@ data-flex-basis="533px"
 &lt;h2 id="degate">&lt;a href="#degate" class="header-anchor">&lt;/a>Degate
 &lt;/h2>&lt;p>As described before, silicon chips reverse engineering is a complex process that can take months. Therefore automation is the key, and here come &lt;a class="link" href="https://www.degate.org" target="_blank" rel="noopener"
 >Degate&lt;/a>, a multi-platform and open source software for semi-automatic VLSI chips reverse engineering. It offers a GUI and help on multiple steps of the process of reversing a silicon chip. It’s a medium-sized software with fewer than one hundred thousand lines of codes. It supports the three major OSes and is Qt based. Translations are available for multiple language to ease the adoption. It offers many features like gate definition, gate, via and wire matching or electrical rule checks for error spotting.&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/my-talk-about-silicon-chips-reverse-engineering-and-degate/degate.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/degate.png"
 width="980"
 height="200"
 loading="lazy"
@@ -65,7 +65,7 @@ data-flex-grow="490"
 data-flex-basis="1176px"
 >&lt;/p>
 &lt;p>Degate help to reverse VLSI chips by creating a gate library from your analysis, provides algorithms for template matching used for finding gate instances, can perform wires and vias matching, allows exporting netlist or can simply help navigate really huge images. Here the focus is on modern ICs with standard cells, and Degate support any 2D capture or imaging method. Hence, contrary to many commercial products, we don’t force any specific capture method and try to support as many possible.&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/my-talk-about-silicon-chips-reverse-engineering-and-degate/overview.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/overview.png"
 width="1412"
 height="754"
 loading="lazy"
@@ -76,7 +76,7 @@ data-flex-basis="449px"
 >&lt;/p>
 &lt;p>Degate is not a new software, it has already quite a long history. Therefore, it also comes with some technical debt since we tried to follow major IC evolution, like in transistor size and count. Degate was first started by Martin Schobert during his master’s thesis, in 2007, with some famous hardware cipher analysis performed using the software. But, at the end of Martin’s thesis in 2010, a minimum maintenance period occurred. No major feature was added, and the field was quite silent. I forked the initial version of Degate in 2018 and did a major rewrite, with a near 70% code rewritten from scratch.&lt;/p>
 &lt;p>The current version of Degate focus on gate library system, automatic gate instances identification, and wires &amp;amp; vias recognition. We also fully provide netlist generation in multiple formats. However we don’t currently support transistors and gate analysis or automatic identification, and don’t help on netlist analysis. In the next major release of Degate we plan to extend that coverage.&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/my-talk-about-silicon-chips-reverse-engineering-and-degate/software.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/software.png"
 width="1456"
 height="521"
 loading="lazy"
@@ -94,7 +94,7 @@ data-flex-basis="670px"
 &lt;h2 id="local-events">&lt;a href="#local-events" class="header-anchor">&lt;/a>Local events
 &lt;/h2>&lt;p>I participated in two local events, in Rennes, namely &amp;ldquo;Bière Sécu&amp;rsquo; Rennes&amp;rdquo; (in May) and &amp;ldquo;Hack the Box Meetup&amp;rdquo; (in September). These smaller events are interesting to battle-test new talks, but are also full of profiles we don&amp;rsquo;t generally see at other bigger conferences (in my opinion). This allowed many great discussions about Degate, that even were the most technical ones.&lt;/p>
 &lt;p>Before going to those events, and particularly to the first (Bière Sécu&amp;rsquo; Rennes), I wasn&amp;rsquo;t very confident that the subject could interest anyone, since it is very technical and touch very uncommon subjects. However, I had very positive feedback from people of very different backgrounds. The introduction of the silicon chips reverse engineering field seemed to have been very appreciated, to my surprise.&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/my-talk-about-silicon-chips-reverse-engineering-and-degate/bsr.jpg"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/bsr.jpg"
 width="800"
 height="600"
 loading="lazy"
@@ -115,7 +115,7 @@ data-flex-basis="320px"
 &lt;p>This talk introduces Degate, presents the challenges of reverse engineering silicon chips and shows a real-world analysis that led to critical discoveries. We first present the importance of low-level hardware validation for security, and list the tools and products available for this task. We then outline the background and current status of Degate, and all the associated engineering and research challenges. Finally, we take the famous case of the MIFARE Classic RFID chip as an example and look at the future horizon of reverse engineering silicon chips.&lt;/p>
 &lt;/blockquote>
 &lt;p>To be honest, regarding the areas of expertise of the public, I wasn&amp;rsquo;t sure if my talk could interest peoples (again), but in the end I got very nice feedback (again). The silicon chips reverse engineering field is so unknown, and connect so many specialties, that it actually has a fairly large potential audience. I also had interesting interactions after the talk, which confirmed the attractiveness of the field.&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/my-talk-about-silicon-chips-reverse-engineering-and-degate/fsic.jpg"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/fsic.jpg"
 width="800"
 height="450"
 loading="lazy"
@@ -130,7 +130,7 @@ data-flex-basis="426px"
 >Hack In Provence&lt;/a> association for its sixth edition, in the oldest cinema in the world, the Eden Cinema in La Ciotat. For me, it&amp;rsquo;s a very special event since no sponsor is authorized, and everything is oriented towards the community. This allows very different subjects and approaches to be presented, and is very welcoming to new speaker. In the end, it was the perfect place to present the silicon chips reverse engineering field, even if the public was very focused on the cybersecurity domain, with only a few people with bases in electronics or physics. This might be the best experience of the year I had presenting this talk.&lt;/p>
 &lt;p>Once again, I got interesting feedback about my presentation, and even had the chance to have &lt;a class="link" href="https://ninjalab.io/eucleak/" target="_blank" rel="noopener"
 >a talk on a side-channel attack&lt;/a> at the opening of the conference, hence the audience was able to have a panoramic view of the domain. And, at my surprise, I got cited on multiple posts regarding the conference afterward, with some people describing the talk as &amp;ldquo;intellectually challenging but enriching&amp;rdquo;.&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/my-talk-about-silicon-chips-reverse-engineering-and-degate/secsea.jpg"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/secsea.jpg"
 width="800"
 height="800"
 loading="lazy"

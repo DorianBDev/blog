@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pwn on Dorian B.</title><link>https://dorianb.net/blog/tags/pwn/</link><description>Recent content in Pwn on Dorian B.</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 05 Nov 2022 10:00:00 +0200</lastBuildDate><atom:link href="https://dorianb.net/blog/tags/pwn/index.xml" rel="self" type="application/rss+xml"/><item><title>WPICTF 2022 - PWN - Calicovision</title><link>https://dorianb.net/blog/p/wpictf-2022-pwn-calicovision/</link><pubDate>Sat, 05 Nov 2022 10:00:00 +0200</pubDate><guid>https://dorianb.net/blog/p/wpictf-2022-pwn-calicovision/</guid><description>&lt;img src="https://dorianb.net/blog/p/wpictf-2022-pwn-calicovision/gdb_overflow.png" alt="Featured image of post WPICTF 2022 - PWN - Calicovision" />&lt;p class="note">This post was written in 2022, but I had never posted it by accident. Published in October 2024.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pwn on Dorian B.</title><link>https://dorianb.net/blog/tags/pwn/</link><description>Recent content in Pwn on Dorian B.</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 05 Nov 2022 10:00:00 +0200</lastBuildDate><atom:link href="https://dorianb.net/blog/tags/pwn/index.xml" rel="self" type="application/rss+xml"/><item><title>WPICTF 2022 - PWN - Calicovision</title><link>https://dorianb.net/blog/wpictf-2022-pwn-calicovision/</link><pubDate>Sat, 05 Nov 2022 10:00:00 +0200</pubDate><guid>https://dorianb.net/blog/wpictf-2022-pwn-calicovision/</guid><description>&lt;img src="https://dorianb.net/blog/wpictf-2022-pwn-calicovision/gdb_overflow.png" alt="Featured image of post WPICTF 2022 - PWN - Calicovision" />&lt;p class="note">This post was written in 2022, but I had never posted it by accident. Published in October 2024.&lt;/p>
 &lt;h1 id="introduction">&lt;a href="#introduction" class="header-anchor">&lt;/a>Introduction
 &lt;/h1>&lt;p>To continue our previous post about the WPICTF 2022 (online, hosted by &lt;a class="link" href="https://wpictf.xyz/" target="_blank" rel="noopener"
 >Worcester Polytechnic Institute Cyber Security Club&lt;/a>), we will focus our attention on a pwn challenge. And to change, this time we&amp;rsquo;ll use &lt;a class="link" href="https://ghidra-sre.org/" target="_blank" rel="noopener"
@@ -31,7 +31,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>As we can see, it will not be that trivial to exploit the vulnerability since &lt;code>RIP&lt;/code> is not directly controlled. However, we can see that &lt;code>RIP&lt;/code> will point to a &lt;code>call&lt;/code> instruction, with the function address stored in &lt;code>RAX&lt;/code>, and &lt;code>RAX&lt;/code> retrieve this function adress from the value pointed by &lt;code>R12&lt;/code>:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/gdb.png"
 width="710"
 height="393"
 loading="lazy"
@@ -60,7 +60,7 @@ data-flex-basis="433px"
 &lt;/div>&lt;p>Then, we can control the flow and if we change what is pointed by &lt;code>R12&lt;/code> to a pointer to a vulnerable code, we win.&lt;/p>
 &lt;p>Without reversing we already have a lot of information, but to validate our hypothesis we will have to open &lt;a class="link" href="https://ghidra-sre.org/" target="_blank" rel="noopener"
 >Ghidra&lt;/a>. We quickly find that the code is in C++ (good news) and therefore there is a lot of garbage code. We start to focus on the &lt;code>Cat&lt;/code> structure (we can make the hypothesis that it&amp;rsquo;s a class) and find some interesting information using the structure editor of Ghidra:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_cat.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/ghidra_cat.png"
 width="1920"
 height="853"
 loading="lazy"
@@ -84,7 +84,7 @@ loading="lazy"
 >&lt;/p>
 &lt;p>If you want to delve deeper into the subject, a good reference is available here: &lt;a class="link" href="http://phrack.org/issues/56/8.html" target="_blank" rel="noopener"
 >SMASHING C++ VPTRS&lt;/a>. We can see the &lt;code>vtable&lt;/code> in &lt;code>gdb&lt;/code>:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb_vtable.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/gdb_vtable.png"
 width="553"
 height="113"
 loading="lazy"
@@ -116,7 +116,7 @@ data-flex-basis="1174px"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>That&amp;rsquo;s good, we can use both techniques without issue (we don&amp;rsquo;t have to deal with any canaries for this buffer overflow). Now let&amp;rsquo;s find the offset to control &lt;code>R12&lt;/code>:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/gdb_overflow.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/gdb_overflow.png"
 width="1497"
 height="822"
 loading="lazy"
@@ -126,7 +126,7 @@ data-flex-grow="182"
 data-flex-basis="437px"
 >&lt;/p>
 &lt;p>The offset is &lt;code>64 (name) + 8 (padding)&lt;/code> to control what is pointed by &lt;code>R12&lt;/code> and therefore &lt;code>RAX&lt;/code>. We can now search for a vulnerable function in Ghidra by searching for a reference to &lt;code>flag.txt&lt;/code> (CTF classic):&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_vuln_fn.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/ghidra_vuln_fn.png"
 width="1920"
 height="899"
 loading="lazy"
@@ -167,7 +167,7 @@ data-flex-basis="512px"
 &lt;li>We can use &lt;code>A - List all cats&lt;/code> that call another virtual function. This implies replacing a virtual function address with &lt;code>HackerCat::pet&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;p>In a diagram this translates to (we find at the top the initial situations, and at the bottom the corresponding exploitation path):&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/exploits.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/exploits.png"
 width="2602"
 height="1612"
 loading="lazy"
@@ -177,7 +177,7 @@ data-flex-grow="161"
 data-flex-basis="387px"
 >&lt;/p>
 &lt;p>Both options are good, but let&amp;rsquo;s take the second option that is simpler to debug. Let&amp;rsquo;s retrieve the &lt;code>vtable&lt;/code> address of &lt;code>HackerCat&lt;/code> and the address of the pointer to &lt;code>HackerCat::pet&lt;/code> in the same table:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/p/wpictf-2022-pwn-calicovision/ghidra_vtable.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/ghidra_vtable.png"
 width="1874"
 height="732"
 loading="lazy"
