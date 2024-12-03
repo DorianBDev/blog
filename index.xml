@@ -128,8 +128,8 @@ data-flex-basis="426px"
 &lt;/h2>&lt;p>Then, in October, I had the chance to make the closing talk of the &lt;a class="link" href="https://secsea.org/" target="_blank" rel="noopener"
 >SecSea&lt;/a> 2024 conference. It was organized by the &lt;a class="link" href="https://www.hackinprovence.fr/" target="_blank" rel="noopener"
 >Hack In Provence&lt;/a> association for its sixth edition, in the oldest cinema in the world, the Eden Cinema in La Ciotat. For me, it&amp;rsquo;s a very special event since no sponsor is authorized, and everything is oriented towards the community. This allows very different subjects and approaches to be presented, and is very welcoming to new speaker. In the end, it was the perfect place to present the silicon chips reverse engineering field, even if the public was very focused on the cybersecurity domain, with only a few people with bases in electronics or physics. This might be the best experience of the year I had presenting this talk.&lt;/p>
-&lt;p>Once again, I got interesting feedback about my presentation, and even had the chance to have &lt;a class="link" href="https://ninjalab.io/eucleak/" target="_blank" rel="noopener"
->a talk on a side-channel attack&lt;/a> at the opening of the conference, hence the audience was able to have a panoramic view of the domain. And, at my surprise, I got cited on multiple posts regarding the conference afterward, with some people describing the talk as &amp;ldquo;intellectually challenging but enriching&amp;rdquo;.&lt;/p>
+&lt;p>Once again, I got interesting feedback about my presentation, and had the chance to have &lt;a class="link" href="https://ninjalab.io/eucleak/" target="_blank" rel="noopener"
+>a talk on a side-channel attack&lt;/a> at the opening of the conference, allowing the audience to have a panoramic view of the domain. And, at my surprise, I got cited on multiple posts regarding the conference afterward, with some people describing the talk as &amp;ldquo;intellectually challenging but enriching&amp;rdquo;.&lt;/p>
 &lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/secsea.jpg"
 width="800"
 height="800"
