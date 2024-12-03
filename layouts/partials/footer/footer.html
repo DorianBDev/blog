@@ -42,13 +42,6 @@
 
 <!-- Everything below is somewhat hacky way of customizing the page... -->
 
-{{ if .Store.Get "hasMermaid" }}
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid/+esm";
-  mermaid.initialize({ startOnLoad: true, theme: "dark" });
-</script>
-{{ end }}
-
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
