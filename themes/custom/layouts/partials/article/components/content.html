@@ -3,10 +3,21 @@
     {{ $wrappedTable := printf "<div class=\"table-wrapper\">${1}</div>" }}
     {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
 
+    <!-- Mermaid loading -->
     {{ if .Store.Get "hasMermaid" }}
     <script type="module">
       import mermaid from "https://cdn.jsdelivr.net/npm/mermaid/+esm";
       mermaid.initialize({ startOnLoad: true, theme: "dark" });
     </script>
     {{ end }}
+
+    <!-- Hide pdf if the browser doesn't support inline pdf viewer -->
+    <script>
+      if (!navigator.pdfViewerEnabled) {
+        var pdfElements = document.getElementsByClassName("pdf"); 
+        for(var i = 0; i < pdfElements.length; i++){
+            pdfElements[i].outerHTML = "&nbsp;&nbsp;Your browser does not support PDF embedding. Unable to display PDF.";
+        }
+      }
+    </script>
 </section>

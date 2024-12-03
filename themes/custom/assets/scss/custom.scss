@@ -116,11 +116,11 @@ details[open] summary .additional {
 }
 
 summary::after {
-  content: "▶";
+  content: "⯈";
   text-align: right;
 }
 details[open] summary:after {
-  content: "▼";
+  content: "⯆";
   text-align: right;
 }
 
