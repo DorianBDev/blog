@@ -16,7 +16,7 @@
       if (!navigator.pdfViewerEnabled) {
         var pdfElements = document.getElementsByClassName("pdf"); 
         for(var i = 0; i < pdfElements.length; i++){
-            pdfElements[i].outerHTML = "&nbsp;&nbsp;Your browser does not support PDF embedding. Unable to display PDF.";
+            pdfElements[i].outerHTML = "<p style='padding: 5px;'>Your browser does not support PDF embedding. Unable to display PDF.</p>";
         }
       }
     </script>
