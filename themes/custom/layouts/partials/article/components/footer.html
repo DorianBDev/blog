@@ -1,0 +1,25 @@
+<footer class="article-footer">
+  {{ partial "article/components/tags" . }} {{ if and
+  (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}
+  <section class="article-copyright">
+    <i class="fa-regular fa-copyright"></i>
+    <span
+      >{{ default .Site.Params.article.license.default .Params.license |
+      markdownify }}</span
+    >
+  </section>
+  {{ end }} {{ if not (eq .Params.ai true) }}
+  <section class="article-copyright" style="margin-top: 5px">
+    <i class="fa-regular fa-star-half-stroke" style="margin-left: -1px"></i>
+    <span>No AI was used to create the text of this blog post.</span>
+  </section>
+  {{ end }} {{- if ne .Lastmod .Date -}}
+  <section class="article-lastmod">
+    {{ partial "helper/icon" "clock" }}
+    <span>
+      {{ T "article.lastUpdatedOn" }} {{ .Lastmod | time.Format ( or
+      .Site.Params.dateFormat.lastUpdated "Jan 02, 2006 15:04 MST" ) }}
+    </span>
+  </section>
+  {{- end -}}
+</footer>
