@@ -67,7 +67,7 @@ params:
         readingTime: true
         license:
             enabled: true
-            default: Licensed under CC0 (Public Domain), No Rights Reserved
+            default: Licensed under CC0 (Public Domain), No Rights Reserved.
 
     comments:
         enabled: true
