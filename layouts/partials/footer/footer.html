@@ -152,6 +152,12 @@
 <!-- Hook to add other information on the article header (not that dirty in fact :p) -->
 <script>
   if (document.getElementsByClassName("main-article").length != 0) {
+    // Remove "new" article label, ugly fix
+    var new_article = document.getElementsByClassName("article-new");
+    if (new_article.length != 0) {
+      new_article[0].outerHTML = "";
+    }
+
     // This can fail, if on main page for example
     var article_header = document.getElementsByClassName("article-time"); // article-time is the article header class
 
