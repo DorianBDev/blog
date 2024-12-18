@@ -187,6 +187,29 @@ summary::-webkit-details-marker {
   text-align: center;
 }
 
+.article-new {
+  margin-left: auto;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  position: relative;
+  display: inline-block;
+  animation: animeNew 1.5s infinite alternate;
+  text-shadow: gray 1px 0 5px;
+}
+
+@keyframes animeNew {
+  from {
+    transform: scale(0.7);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 /*
 * Print support, any class in this section will be removed when printing (e.g. to PDF).
 */
