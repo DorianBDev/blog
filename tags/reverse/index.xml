@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Reverse on Dorian B.</title><link>https://dorianb.net/blog/tags/reverse/</link><description>Recent content in Reverse on Dorian B.</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 05 Nov 2022 10:00:00 +0200</lastBuildDate><atom:link href="https://dorianb.net/blog/tags/reverse/index.xml" rel="self" type="application/rss+xml"/><item><title>WPICTF 2022 - PWN - Calicovision</title><link>https://dorianb.net/blog/wpictf-2022-pwn-calicovision/</link><pubDate>Sat, 05 Nov 2022 10:00:00 +0200</pubDate><guid>https://dorianb.net/blog/wpictf-2022-pwn-calicovision/</guid><description>&lt;img src="https://dorianb.net/blog/wpictf-2022-pwn-calicovision/gdb_overflow.png" alt="Featured image of post WPICTF 2022 - PWN - Calicovision" />&lt;p class="note">This post was written in 2022, but I had never posted it by accident. Published in October 2024.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Reverse on Dorian B.</title><link>https://dorianb.net/blog/tags/reverse/</link><description>Recent content in Reverse on Dorian B.</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 05 Nov 2022 10:00:00 +0200</lastBuildDate><atom:link href="https://dorianb.net/blog/tags/reverse/index.xml" rel="self" type="application/rss+xml"/><item><title>WPICTF 2022 - PWN - Calicovision</title><link>https://dorianb.net/blog/wpictf2022-pwn/</link><pubDate>Sat, 05 Nov 2022 10:00:00 +0200</pubDate><guid>https://dorianb.net/blog/wpictf2022-pwn/</guid><description>&lt;img src="https://dorianb.net/blog/wpictf2022-pwn/gdb_overflow.png" alt="Featured image of post WPICTF 2022 - PWN - Calicovision" />&lt;p class="note">This post was written in 2022, but I had never posted it by accident. Published in October 2024.&lt;/p>
 &lt;h1 id="introduction">&lt;a href="#introduction" class="header-anchor">&lt;/a>Introduction
 &lt;/h1>&lt;p>To continue our previous post about the WPICTF 2022 (online, hosted by &lt;a class="link" href="https://wpictf.xyz/" target="_blank" rel="noopener"
 >Worcester Polytechnic Institute Cyber Security Club&lt;/a>), we will focus our attention on a pwn challenge. And to change, this time we&amp;rsquo;ll use &lt;a class="link" href="https://ghidra-sre.org/" target="_blank" rel="noopener"
@@ -31,7 +31,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>As we can see, it will not be that trivial to exploit the vulnerability since &lt;code>RIP&lt;/code> is not directly controlled. However, we can see that &lt;code>RIP&lt;/code> will point to a &lt;code>call&lt;/code> instruction, with the function address stored in &lt;code>RAX&lt;/code>, and &lt;code>RAX&lt;/code> retrieve this function adress from the value pointed by &lt;code>R12&lt;/code>:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/gdb.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/gdb.png"
 width="710"
 height="393"
 loading="lazy"
@@ -60,7 +60,7 @@ data-flex-basis="433px"
 &lt;/div>&lt;p>Then, we can control the flow and if we change what is pointed by &lt;code>R12&lt;/code> to a pointer to a vulnerable code, we win.&lt;/p>
 &lt;p>Without reversing we already have a lot of information, but to validate our hypothesis we will have to open &lt;a class="link" href="https://ghidra-sre.org/" target="_blank" rel="noopener"
 >Ghidra&lt;/a>. We quickly find that the code is in C++ (good news) and therefore there is a lot of garbage code. We start to focus on the &lt;code>Cat&lt;/code> structure (we can make the hypothesis that it&amp;rsquo;s a class) and find some interesting information using the structure editor of Ghidra:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/ghidra_cat.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/ghidra_cat.png"
 width="1920"
 height="853"
 loading="lazy"
@@ -84,7 +84,7 @@ loading="lazy"
 >&lt;/p>
 &lt;p>If you want to delve deeper into the subject, a good reference is available here: &lt;a class="link" href="http://phrack.org/issues/56/8.html" target="_blank" rel="noopener"
 >SMASHING C++ VPTRS&lt;/a>. We can see the &lt;code>vtable&lt;/code> in &lt;code>gdb&lt;/code>:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/gdb_vtable.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/gdb_vtable.png"
 width="553"
 height="113"
 loading="lazy"
@@ -116,7 +116,7 @@ data-flex-basis="1174px"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>That&amp;rsquo;s good, we can use both techniques without issue (we don&amp;rsquo;t have to deal with any canaries for this buffer overflow). Now let&amp;rsquo;s find the offset to control &lt;code>R12&lt;/code>:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/gdb_overflow.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/gdb_overflow.png"
 width="1497"
 height="822"
 loading="lazy"
@@ -126,7 +126,7 @@ data-flex-grow="182"
 data-flex-basis="437px"
 >&lt;/p>
 &lt;p>The offset is &lt;code>64 (name) + 8 (padding)&lt;/code> to control what is pointed by &lt;code>R12&lt;/code> and therefore &lt;code>RAX&lt;/code>. We can now search for a vulnerable function in Ghidra by searching for a reference to &lt;code>flag.txt&lt;/code> (CTF classic):&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/ghidra_vuln_fn.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/ghidra_vuln_fn.png"
 width="1920"
 height="899"
 loading="lazy"
@@ -167,7 +167,7 @@ data-flex-basis="512px"
 &lt;li>We can use &lt;code>A - List all cats&lt;/code> that call another virtual function. This implies replacing a virtual function address with &lt;code>HackerCat::pet&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;p>In a diagram this translates to (we find at the top the initial situations, and at the bottom the corresponding exploitation path):&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/exploits.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/exploits.png"
 width="2602"
 height="1612"
 loading="lazy"
@@ -177,7 +177,7 @@ data-flex-grow="161"
 data-flex-basis="387px"
 >&lt;/p>
 &lt;p>Both options are good, but let&amp;rsquo;s take the second option that is simpler to debug. Let&amp;rsquo;s retrieve the &lt;code>vtable&lt;/code> address of &lt;code>HackerCat&lt;/code> and the address of the pointer to &lt;code>HackerCat::pet&lt;/code> in the same table:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/ghidra_vtable.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/ghidra_vtable.png"
 width="1874"
 height="732"
 loading="lazy"
@@ -262,7 +262,7 @@ data-flex-basis="614px"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>And we get the flag: &lt;code>WPI{c0rrup73d_c475_cr3473_ch405}&lt;/code>.&lt;/p>
-&lt;p>In the end, this was very simple, but allowed us to manipulate &lt;code>vtables&lt;/code> and many tools.&lt;/p></description></item><item><title>WPICTF 2022 - Reverse - Warmup</title><link>https://dorianb.net/blog/wpictf-2022-reverse-warmup/</link><pubDate>Tue, 04 Oct 2022 18:35:19 +0200</pubDate><guid>https://dorianb.net/blog/wpictf-2022-reverse-warmup/</guid><description>&lt;img src="https://dorianb.net/blog/wpictf-2022-reverse-warmup/1_cutter.png" alt="Featured image of post WPICTF 2022 - Reverse - Warmup" />&lt;p class="note">This post was written in 2022, but I had never posted it by accident. Published in October 2024.&lt;/p>
+&lt;p>In the end, this was very simple, but allowed us to manipulate &lt;code>vtables&lt;/code> and many tools.&lt;/p></description></item><item><title>WPICTF 2022 - Reverse - Warmup</title><link>https://dorianb.net/blog/wpictf2022-reverse/</link><pubDate>Tue, 04 Oct 2022 18:35:19 +0200</pubDate><guid>https://dorianb.net/blog/wpictf2022-reverse/</guid><description>&lt;img src="https://dorianb.net/blog/wpictf2022-reverse/1_cutter.png" alt="Featured image of post WPICTF 2022 - Reverse - Warmup" />&lt;p class="note">This post was written in 2022, but I had never posted it by accident. Published in October 2024.&lt;/p>
 &lt;h1 id="introduction">&lt;a href="#introduction" class="header-anchor">&lt;/a>Introduction
 &lt;/h1>&lt;p>To do a small warming up before the &lt;a class="link" href="https://challenge.risksummit.fr/" target="_blank" rel="noopener"
 >Purple Pill Challenge CTF&lt;/a>, we participated in the WPICTF 2022 CTF (online, hosted by &lt;a class="link" href="https://wpictf.xyz/" target="_blank" rel="noopener"
@@ -270,7 +270,7 @@ data-flex-basis="614px"
 &lt;h2 id="taylors-serious-data">&lt;a href="#taylors-serious-data" class="header-anchor">&lt;/a>Taylor&amp;rsquo;s Serious Data
 &lt;/h2>&lt;p>This was a (very) simple one. We were given an x64 ELF binary with a text file &amp;ldquo;songLyrics.txt&amp;rdquo; that seems encrypted. After opening the binary in &lt;a class="link" href="https://cutter.re/" target="_blank" rel="noopener"
 >Cutter&lt;/a>, we can find the encryption routine in the &lt;code>main&lt;/code> function:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/1_cutter.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/1_cutter.png"
 width="1705"
 height="726"
 loading="lazy"
@@ -351,7 +351,7 @@ data-flex-basis="563px"
 &lt;h2 id="xf1ltr80r">&lt;a href="#xf1ltr80r" class="header-anchor">&lt;/a>xf1ltr80r
 &lt;/h2>&lt;p>Let&amp;rsquo;s investigate a second challenge. We start with a x64 ELF binary, and since I liked using &lt;a class="link" href="https://cutter.re/" target="_blank" rel="noopener"
 >Cutter&lt;/a> on the previous challenge, I&amp;rsquo;ll continue with it. After opening the binary, we easily find the function containing &amp;ldquo;data to exfiltrate&amp;rdquo;:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/2_cutter.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/2_cutter.png"
 width="1642"
 height="735"
 loading="lazy"
@@ -371,7 +371,7 @@ data-flex-basis="536px"
 &lt;/div>
 &lt;/div>&lt;p>We can now use &lt;a class="link" href="https://gchq.github.io/CyberChef/" target="_blank" rel="noopener"
 >Cyberchef&lt;/a> to perform the operation:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/2_cyberchef.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/2_cyberchef.png"
 width="1081"
 height="579"
 loading="lazy"
@@ -383,7 +383,7 @@ data-flex-basis="448px"
 &lt;p>And another flag: &lt;code>WPI{3xtr3m3ly_n#rdy_13375p34k}&lt;/code>. Very trivial.&lt;/p>
 &lt;h2 id="needtocough">&lt;a href="#needtocough" class="header-anchor">&lt;/a>NeedToCough
 &lt;/h2>&lt;p>This is the last &amp;ldquo;easy&amp;rdquo; challenge I did and it was, in my opinion, the best one (still trivial, but the journey was nice and somehow realistic). We start the challenge with a &lt;code>pcap&lt;/code> file that contains multiple HTTP requests and an encrypted file that was a &lt;code>jpg&lt;/code> image. After analyzing some frames, I found that these requests contained a file. Therefore, I exported it using Wireshark:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/3_wireshark.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/3_wireshark.png"
 width="1264"
 height="537"
 loading="lazy"
@@ -401,7 +401,7 @@ data-flex-basis="564px"
 &lt;li>And a last one that generates the permutation table.&lt;/li>
 &lt;/ul>
 &lt;p>The part that generates the permutation table is at the beginning of a function that also deals with the notice part (useless here):&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/3_permutation_table.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/3_permutation_table.png"
 width="1674"
 height="723"
 loading="lazy"
@@ -496,7 +496,7 @@ data-flex-basis="555px"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>Then, we can continue with another easy part, by analyzing the hexadecimal table generation code:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/3_hexa_table.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/3_hexa_table.png"
 width="1674"
 height="723"
 loading="lazy"
@@ -540,7 +540,7 @@ data-flex-basis="555px"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>We can now analyze the main encryption loop:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/3_permutation_loop.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/3_permutation_loop.png"
 width="1674"
 height="723"
 loading="lazy"
@@ -699,7 +699,7 @@ data-flex-basis="555px"
 &lt;/div>
 &lt;/div>&lt;p>A tip I used to debug this script was checking that we get the magic number of JPEG files for the first bytes. This can also be used to brute force the permutation table (if you don&amp;rsquo;t like reverse engineering 😉).&lt;/p>
 &lt;p>After running the script on the provided file (containing the encrypted image to retrieve), I obtained the initial image:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/3_res.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/3_res.png"
 width="882"
 height="644"
 loading="lazy"

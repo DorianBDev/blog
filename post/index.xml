@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Dorian B.</title><link>https://dorianb.net/blog/post/</link><description>Recent content in Posts on Dorian B.</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 03 Dec 2024 12:00:00 +0200</lastBuildDate><atom:link href="https://dorianb.net/blog/post/index.xml" rel="self" type="application/rss+xml"/><item><title>My Talk About Silicon Chips Reverse Engineering and Degate</title><link>https://dorianb.net/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/</link><pubDate>Tue, 03 Dec 2024 12:00:00 +0200</pubDate><guid>https://dorianb.net/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/</guid><description>&lt;img src="https://dorianb.net/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/image.png" alt="Featured image of post My Talk About Silicon Chips Reverse Engineering and Degate" />&lt;p class="note">Talk PDF and sources are available &lt;a class="link" href="https://dorianb.net/talks/Degate2024/" target="_blank" rel="noopener"
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Dorian B.</title><link>https://dorianb.net/blog/post/</link><description>Recent content in Posts on Dorian B.</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 03 Dec 2024 12:00:00 +0200</lastBuildDate><atom:link href="https://dorianb.net/blog/post/index.xml" rel="self" type="application/rss+xml"/><item><title>My Talk About Silicon Chips Reverse Engineering and Degate</title><link>https://dorianb.net/blog/degate-talk/</link><pubDate>Tue, 03 Dec 2024 12:00:00 +0200</pubDate><guid>https://dorianb.net/blog/degate-talk/</guid><description>&lt;img src="https://dorianb.net/blog/degate-talk/image.png" alt="Featured image of post My Talk About Silicon Chips Reverse Engineering and Degate" />&lt;p class="note">Talk PDF and sources are available &lt;a class="link" href="https://dorianb.net/talks/Degate2024/" target="_blank" rel="noopener"
 >here&lt;/a>, and are under CC0 (Public Domain) license.&lt;/p>
 &lt;p class="warning">My work on silicon chips reverse engineering or Degate is a hobby, and doesn&amp;rsquo;t constitute my main area of expertise, and is not related to what I do professionally (mostly malware development/analysis). Everything here was done in my spare time.&lt;/p>
 &lt;h1 id="introduction">&lt;a href="#introduction" class="header-anchor">&lt;/a>Introduction
@@ -31,7 +31,7 @@ SecSea2k24: milestone, crit, m4, 2024-10-12, 0d
 &lt;li>Algorithm retrieval with an additional analysis step, when the netlist is too big or too complex to be exploited directly.&lt;/li>
 &lt;/ol>
 &lt;p>The image below is summarizing that process:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/sre.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/degate-talk/sre.png"
 width="1237"
 height="682"
 loading="lazy"
@@ -42,7 +42,7 @@ data-flex-basis="435px"
 >&lt;/p>
 &lt;p>To perform that process, we first need to capture the chip, this passes by decapsulation, the selection of an area of interest, delayering, cleaning and stitching. Then, we have to analyze each specific gate layout to build our gate library, starting with transistors. Using pattern matching, we can then use that library to retrieve all other gate instances. After that, we need to trace the wires and vias to connect together all the identified gates, inputs and outputs. Which will give us, after having described each gate in an HDL language, the full netlist. We can simulate that netlist to start spotting errors in the analysis. And, if the netlist is huge, we can use automated processes and methods to extract the underlying algorithm, discover specification and build a software emulator.&lt;/p>
 &lt;p>The below image present an example of a logic gate analysis:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/example.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/degate-talk/example.png"
 width="1819"
 height="818"
 loading="lazy"
@@ -56,7 +56,7 @@ data-flex-basis="533px"
 &lt;h2 id="degate">&lt;a href="#degate" class="header-anchor">&lt;/a>Degate
 &lt;/h2>&lt;p>As described before, silicon chips reverse engineering is a complex process that can take months. Therefore automation is the key, and here come &lt;a class="link" href="https://www.degate.org" target="_blank" rel="noopener"
 >Degate&lt;/a>, a multi-platform and open source software for semi-automatic VLSI chips reverse engineering. It offers a GUI and help on multiple steps of the process of reversing a silicon chip. It’s a medium-sized software with fewer than one hundred thousand lines of codes. It supports the three major OSes and is Qt based. Translations are available for multiple language to ease the adoption. It offers many features like gate definition, gate, via and wire matching or electrical rule checks for error spotting.&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/degate.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/degate-talk/degate.png"
 width="980"
 height="200"
 loading="lazy"
@@ -65,7 +65,7 @@ data-flex-grow="490"
 data-flex-basis="1176px"
 >&lt;/p>
 &lt;p>Degate help to reverse VLSI chips by creating a gate library from your analysis, provides algorithms for template matching used for finding gate instances, can perform wires and vias matching, allows exporting netlist or can simply help navigate really huge images. Here the focus is on modern ICs with standard cells, and Degate support any 2D capture or imaging method. Hence, contrary to many commercial products, we don’t force any specific capture method and try to support as many possible.&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/overview.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/degate-talk/overview.png"
 width="1412"
 height="754"
 loading="lazy"
@@ -76,7 +76,7 @@ data-flex-basis="449px"
 >&lt;/p>
 &lt;p>Degate is not a new software, it has already quite a long history. Therefore, it also comes with some technical debt since we tried to follow major IC evolution, like in transistor size and count. Degate was first started by Martin Schobert during his master’s thesis, in 2007, with some famous hardware cipher analysis performed using the software. But, at the end of Martin’s thesis in 2010, a minimum maintenance period occurred. No major feature was added, and the field was quite silent. I forked the initial version of Degate in 2018 and did a major rewrite, with a near 70% code rewritten from scratch.&lt;/p>
 &lt;p>The current version of Degate focus on gate library system, automatic gate instances identification, and wires &amp;amp; vias recognition. We also fully provide netlist generation in multiple formats. However we don’t currently support transistors and gate analysis or automatic identification, and don’t help on netlist analysis. In the next major release of Degate we plan to extend that coverage.&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/software.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/degate-talk/software.png"
 width="1456"
 height="521"
 loading="lazy"
@@ -94,7 +94,7 @@ data-flex-basis="670px"
 &lt;h2 id="local-events">&lt;a href="#local-events" class="header-anchor">&lt;/a>Local events
 &lt;/h2>&lt;p>I participated in two local events, in Rennes, namely &amp;ldquo;Bière Sécu&amp;rsquo; Rennes&amp;rdquo; (in May) and &amp;ldquo;Hack the Box Meetup&amp;rdquo; (in September). These smaller events are interesting to battle-test new talks, but are also full of profiles we don&amp;rsquo;t generally see at other bigger conferences (in my opinion). This allowed many great discussions about Degate, that even were the most technical ones.&lt;/p>
 &lt;p>Before going to those events, and particularly to the first (Bière Sécu&amp;rsquo; Rennes), I wasn&amp;rsquo;t very confident that the subject could interest anyone, since it is very technical and touch very uncommon subjects. However, I had very positive feedback from people of very different backgrounds. The introduction of the silicon chips reverse engineering field seemed to have been very appreciated, to my surprise.&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/bsr.jpg"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/degate-talk/bsr.jpg"
 width="800"
 height="600"
 loading="lazy"
@@ -115,7 +115,7 @@ data-flex-basis="320px"
 &lt;p>This talk introduces Degate, presents the challenges of reverse engineering silicon chips and shows a real-world analysis that led to critical discoveries. We first present the importance of low-level hardware validation for security, and list the tools and products available for this task. We then outline the background and current status of Degate, and all the associated engineering and research challenges. Finally, we take the famous case of the MIFARE Classic RFID chip as an example and look at the future horizon of reverse engineering silicon chips.&lt;/p>
 &lt;/blockquote>
 &lt;p>To be honest, regarding the areas of expertise of the public, I wasn&amp;rsquo;t sure if my talk could interest peoples (again), but in the end I got very nice feedback (again). The silicon chips reverse engineering field is so unknown, and connect so many specialties, that it actually has a fairly large potential audience. I also had interesting interactions after the talk, which confirmed the attractiveness of the field.&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/fsic.jpg"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/degate-talk/fsic.jpg"
 width="800"
 height="450"
 loading="lazy"
@@ -130,7 +130,7 @@ data-flex-basis="426px"
 >Hack In Provence&lt;/a> association for its sixth edition, in the oldest cinema in the world, the Eden Cinema in La Ciotat. For me, it&amp;rsquo;s a very special event since no sponsor is authorized, and everything is oriented towards the community. This allows very different subjects and approaches to be presented, and is very welcoming to new speaker. In the end, it was the perfect place to present the silicon chips reverse engineering field, even if the public was very focused on the cybersecurity domain, with only a few people with bases in electronics or physics. This might be the best experience of the year I had presenting this talk.&lt;/p>
 &lt;p>Once again, I got interesting feedback about my presentation, and had the chance to have &lt;a class="link" href="https://ninjalab.io/eucleak/" target="_blank" rel="noopener"
 >a talk on a side-channel attack&lt;/a> at the opening of the conference, allowing the audience to have a panoramic view of the domain. And, at my surprise, I got cited on multiple posts regarding the conference afterward, with some people describing the talk as &amp;ldquo;intellectually challenging but enriching&amp;rdquo;.&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/my-talk-about-silicon-chips-reverse-engineering-and-degate/secsea.jpg"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/degate-talk/secsea.jpg"
 width="800"
 height="800"
 loading="lazy"
@@ -2414,7 +2414,7 @@ Presentation PDF
 &lt;li>&lt;em>Mikhail Svarichevsky.&lt;/em> &lt;strong>Zeptobars, &lt;a class="link" href="https://zeptobars.com/en/" target="_blank" rel="noopener"
 >https://zeptobars.com/en/&lt;/a>.&lt;/strong>&lt;/li>
 &lt;li>&lt;em>Zonenberg Andrew Yener Bulent.&lt;/em> &lt;strong>Csci 4974/6974 hardware reverse engineering, 2014.&lt;/strong>&lt;/li>
-&lt;/ul></description></item><item><title>WPICTF 2022 - PWN - Calicovision</title><link>https://dorianb.net/blog/wpictf-2022-pwn-calicovision/</link><pubDate>Sat, 05 Nov 2022 10:00:00 +0200</pubDate><guid>https://dorianb.net/blog/wpictf-2022-pwn-calicovision/</guid><description>&lt;img src="https://dorianb.net/blog/wpictf-2022-pwn-calicovision/gdb_overflow.png" alt="Featured image of post WPICTF 2022 - PWN - Calicovision" />&lt;p class="note">This post was written in 2022, but I had never posted it by accident. Published in October 2024.&lt;/p>
+&lt;/ul></description></item><item><title>WPICTF 2022 - PWN - Calicovision</title><link>https://dorianb.net/blog/wpictf2022-pwn/</link><pubDate>Sat, 05 Nov 2022 10:00:00 +0200</pubDate><guid>https://dorianb.net/blog/wpictf2022-pwn/</guid><description>&lt;img src="https://dorianb.net/blog/wpictf2022-pwn/gdb_overflow.png" alt="Featured image of post WPICTF 2022 - PWN - Calicovision" />&lt;p class="note">This post was written in 2022, but I had never posted it by accident. Published in October 2024.&lt;/p>
 &lt;h1 id="introduction">&lt;a href="#introduction" class="header-anchor">&lt;/a>Introduction
 &lt;/h1>&lt;p>To continue our previous post about the WPICTF 2022 (online, hosted by &lt;a class="link" href="https://wpictf.xyz/" target="_blank" rel="noopener"
 >Worcester Polytechnic Institute Cyber Security Club&lt;/a>), we will focus our attention on a pwn challenge. And to change, this time we&amp;rsquo;ll use &lt;a class="link" href="https://ghidra-sre.org/" target="_blank" rel="noopener"
@@ -2447,7 +2447,7 @@ Presentation PDF
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>As we can see, it will not be that trivial to exploit the vulnerability since &lt;code>RIP&lt;/code> is not directly controlled. However, we can see that &lt;code>RIP&lt;/code> will point to a &lt;code>call&lt;/code> instruction, with the function address stored in &lt;code>RAX&lt;/code>, and &lt;code>RAX&lt;/code> retrieve this function adress from the value pointed by &lt;code>R12&lt;/code>:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/gdb.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/gdb.png"
 width="710"
 height="393"
 loading="lazy"
@@ -2476,7 +2476,7 @@ data-flex-basis="433px"
 &lt;/div>&lt;p>Then, we can control the flow and if we change what is pointed by &lt;code>R12&lt;/code> to a pointer to a vulnerable code, we win.&lt;/p>
 &lt;p>Without reversing we already have a lot of information, but to validate our hypothesis we will have to open &lt;a class="link" href="https://ghidra-sre.org/" target="_blank" rel="noopener"
 >Ghidra&lt;/a>. We quickly find that the code is in C++ (good news) and therefore there is a lot of garbage code. We start to focus on the &lt;code>Cat&lt;/code> structure (we can make the hypothesis that it&amp;rsquo;s a class) and find some interesting information using the structure editor of Ghidra:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/ghidra_cat.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/ghidra_cat.png"
 width="1920"
 height="853"
 loading="lazy"
@@ -2500,7 +2500,7 @@ loading="lazy"
 >&lt;/p>
 &lt;p>If you want to delve deeper into the subject, a good reference is available here: &lt;a class="link" href="http://phrack.org/issues/56/8.html" target="_blank" rel="noopener"
 >SMASHING C++ VPTRS&lt;/a>. We can see the &lt;code>vtable&lt;/code> in &lt;code>gdb&lt;/code>:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/gdb_vtable.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/gdb_vtable.png"
 width="553"
 height="113"
 loading="lazy"
@@ -2532,7 +2532,7 @@ data-flex-basis="1174px"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>That&amp;rsquo;s good, we can use both techniques without issue (we don&amp;rsquo;t have to deal with any canaries for this buffer overflow). Now let&amp;rsquo;s find the offset to control &lt;code>R12&lt;/code>:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/gdb_overflow.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/gdb_overflow.png"
 width="1497"
 height="822"
 loading="lazy"
@@ -2542,7 +2542,7 @@ data-flex-grow="182"
 data-flex-basis="437px"
 >&lt;/p>
 &lt;p>The offset is &lt;code>64 (name) + 8 (padding)&lt;/code> to control what is pointed by &lt;code>R12&lt;/code> and therefore &lt;code>RAX&lt;/code>. We can now search for a vulnerable function in Ghidra by searching for a reference to &lt;code>flag.txt&lt;/code> (CTF classic):&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/ghidra_vuln_fn.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/ghidra_vuln_fn.png"
 width="1920"
 height="899"
 loading="lazy"
@@ -2583,7 +2583,7 @@ data-flex-basis="512px"
 &lt;li>We can use &lt;code>A - List all cats&lt;/code> that call another virtual function. This implies replacing a virtual function address with &lt;code>HackerCat::pet&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;p>In a diagram this translates to (we find at the top the initial situations, and at the bottom the corresponding exploitation path):&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/exploits.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/exploits.png"
 width="2602"
 height="1612"
 loading="lazy"
@@ -2593,7 +2593,7 @@ data-flex-grow="161"
 data-flex-basis="387px"
 >&lt;/p>
 &lt;p>Both options are good, but let&amp;rsquo;s take the second option that is simpler to debug. Let&amp;rsquo;s retrieve the &lt;code>vtable&lt;/code> address of &lt;code>HackerCat&lt;/code> and the address of the pointer to &lt;code>HackerCat::pet&lt;/code> in the same table:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-pwn-calicovision/ghidra_vtable.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-pwn/ghidra_vtable.png"
 width="1874"
 height="732"
 loading="lazy"
@@ -2678,7 +2678,7 @@ data-flex-basis="614px"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>And we get the flag: &lt;code>WPI{c0rrup73d_c475_cr3473_ch405}&lt;/code>.&lt;/p>
-&lt;p>In the end, this was very simple, but allowed us to manipulate &lt;code>vtables&lt;/code> and many tools.&lt;/p></description></item><item><title>WPICTF 2022 - Reverse - Warmup</title><link>https://dorianb.net/blog/wpictf-2022-reverse-warmup/</link><pubDate>Tue, 04 Oct 2022 18:35:19 +0200</pubDate><guid>https://dorianb.net/blog/wpictf-2022-reverse-warmup/</guid><description>&lt;img src="https://dorianb.net/blog/wpictf-2022-reverse-warmup/1_cutter.png" alt="Featured image of post WPICTF 2022 - Reverse - Warmup" />&lt;p class="note">This post was written in 2022, but I had never posted it by accident. Published in October 2024.&lt;/p>
+&lt;p>In the end, this was very simple, but allowed us to manipulate &lt;code>vtables&lt;/code> and many tools.&lt;/p></description></item><item><title>WPICTF 2022 - Reverse - Warmup</title><link>https://dorianb.net/blog/wpictf2022-reverse/</link><pubDate>Tue, 04 Oct 2022 18:35:19 +0200</pubDate><guid>https://dorianb.net/blog/wpictf2022-reverse/</guid><description>&lt;img src="https://dorianb.net/blog/wpictf2022-reverse/1_cutter.png" alt="Featured image of post WPICTF 2022 - Reverse - Warmup" />&lt;p class="note">This post was written in 2022, but I had never posted it by accident. Published in October 2024.&lt;/p>
 &lt;h1 id="introduction">&lt;a href="#introduction" class="header-anchor">&lt;/a>Introduction
 &lt;/h1>&lt;p>To do a small warming up before the &lt;a class="link" href="https://challenge.risksummit.fr/" target="_blank" rel="noopener"
 >Purple Pill Challenge CTF&lt;/a>, we participated in the WPICTF 2022 CTF (online, hosted by &lt;a class="link" href="https://wpictf.xyz/" target="_blank" rel="noopener"
@@ -2686,7 +2686,7 @@ data-flex-basis="614px"
 &lt;h2 id="taylors-serious-data">&lt;a href="#taylors-serious-data" class="header-anchor">&lt;/a>Taylor&amp;rsquo;s Serious Data
 &lt;/h2>&lt;p>This was a (very) simple one. We were given an x64 ELF binary with a text file &amp;ldquo;songLyrics.txt&amp;rdquo; that seems encrypted. After opening the binary in &lt;a class="link" href="https://cutter.re/" target="_blank" rel="noopener"
 >Cutter&lt;/a>, we can find the encryption routine in the &lt;code>main&lt;/code> function:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/1_cutter.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/1_cutter.png"
 width="1705"
 height="726"
 loading="lazy"
@@ -2767,7 +2767,7 @@ data-flex-basis="563px"
 &lt;h2 id="xf1ltr80r">&lt;a href="#xf1ltr80r" class="header-anchor">&lt;/a>xf1ltr80r
 &lt;/h2>&lt;p>Let&amp;rsquo;s investigate a second challenge. We start with a x64 ELF binary, and since I liked using &lt;a class="link" href="https://cutter.re/" target="_blank" rel="noopener"
 >Cutter&lt;/a> on the previous challenge, I&amp;rsquo;ll continue with it. After opening the binary, we easily find the function containing &amp;ldquo;data to exfiltrate&amp;rdquo;:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/2_cutter.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/2_cutter.png"
 width="1642"
 height="735"
 loading="lazy"
@@ -2787,7 +2787,7 @@ data-flex-basis="536px"
 &lt;/div>
 &lt;/div>&lt;p>We can now use &lt;a class="link" href="https://gchq.github.io/CyberChef/" target="_blank" rel="noopener"
 >Cyberchef&lt;/a> to perform the operation:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/2_cyberchef.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/2_cyberchef.png"
 width="1081"
 height="579"
 loading="lazy"
@@ -2799,7 +2799,7 @@ data-flex-basis="448px"
 &lt;p>And another flag: &lt;code>WPI{3xtr3m3ly_n#rdy_13375p34k}&lt;/code>. Very trivial.&lt;/p>
 &lt;h2 id="needtocough">&lt;a href="#needtocough" class="header-anchor">&lt;/a>NeedToCough
 &lt;/h2>&lt;p>This is the last &amp;ldquo;easy&amp;rdquo; challenge I did and it was, in my opinion, the best one (still trivial, but the journey was nice and somehow realistic). We start the challenge with a &lt;code>pcap&lt;/code> file that contains multiple HTTP requests and an encrypted file that was a &lt;code>jpg&lt;/code> image. After analyzing some frames, I found that these requests contained a file. Therefore, I exported it using Wireshark:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/3_wireshark.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/3_wireshark.png"
 width="1264"
 height="537"
 loading="lazy"
@@ -2817,7 +2817,7 @@ data-flex-basis="564px"
 &lt;li>And a last one that generates the permutation table.&lt;/li>
 &lt;/ul>
 &lt;p>The part that generates the permutation table is at the beginning of a function that also deals with the notice part (useless here):&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/3_permutation_table.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/3_permutation_table.png"
 width="1674"
 height="723"
 loading="lazy"
@@ -2912,7 +2912,7 @@ data-flex-basis="555px"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>Then, we can continue with another easy part, by analyzing the hexadecimal table generation code:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/3_hexa_table.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/3_hexa_table.png"
 width="1674"
 height="723"
 loading="lazy"
@@ -2956,7 +2956,7 @@ data-flex-basis="555px"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>We can now analyze the main encryption loop:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/3_permutation_loop.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/3_permutation_loop.png"
 width="1674"
 height="723"
 loading="lazy"
@@ -3115,7 +3115,7 @@ data-flex-basis="555px"
 &lt;/div>
 &lt;/div>&lt;p>A tip I used to debug this script was checking that we get the magic number of JPEG files for the first bytes. This can also be used to brute force the permutation table (if you don&amp;rsquo;t like reverse engineering 😉).&lt;/p>
 &lt;p>After running the script on the provided file (containing the encrypted image to retrieve), I obtained the initial image:&lt;/p>
-&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf-2022-reverse-warmup/3_res.png"
+&lt;p>&lt;img src="https://dorianb.net/blog/blog/wpictf2022-reverse/3_res.png"
 width="882"
 height="644"
 loading="lazy"
