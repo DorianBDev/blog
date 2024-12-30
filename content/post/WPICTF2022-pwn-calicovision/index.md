@@ -1,6 +1,7 @@
 ---
 title: "WPICTF 2022 - PWN - Calicovision"
 description: A simple pwn challenge from WPICTF 2022, around vtables.
+slug: wpictf2022-pwn
 date: 2022-11-05T10:00:00+02:00
 image: gdb_overflow.png
 math:

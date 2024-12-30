@@ -1,6 +1,7 @@
 ---
 title: "My Talk About Silicon Chips Reverse Engineering and Degate"
-description: Introduce a talk about silicon chips RE and Degate I presented at multiple conferences in 2024. 
+description: Introduce a talk about silicon chips RE and Degate I presented at multiple conferences in 2024.
+slug: degate-talk
 date: 2024-12-03T12:00:00+02:00
 image: image.png
 math:

@@ -1,6 +1,7 @@
 ---
 title: "WPICTF 2022 - Reverse - Warmup"
-description: Some very simple reverse challenges from WPICTF 2022. 
+description: Some very simple reverse challenges from WPICTF 2022.
+slug: wpictf2022-reverse
 date: 2022-10-04T18:35:19+02:00
 image: 1_cutter.png
 math:
