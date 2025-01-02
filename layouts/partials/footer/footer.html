@@ -234,6 +234,37 @@
         }
       }
 
+      var contents = document.getElementsByClassName("article-content");
+      var toggleJustify = function () {
+        if (contents.length > 0) {
+          var content = contents[0];
+
+          if (content.style.textAlign === "justify") {
+            content.style.textAlign = "start";
+            localStorage.setItem("justify", "false");
+          } else {
+            content.style.textAlign = "justify";
+            localStorage.setItem("justify", "true");
+          }
+        }
+      };
+
+      if (contents.length > 0) {
+        header.innerHTML += `
+              <div id="sidebars-control" style="margin-left: -15px;">
+                  <a href="javascript:void('Toggle text justification')" onclick="toggleJustify()">
+                  <svg width="800px" height="800px" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-filled icon-tabler-layout-sidebar-left-collapse"><path d="M3,7H21a1,1,0,0,0,0-2H3A1,1,0,0,0,3,7ZM21,17H3a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Zm0-4H3a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Zm0-4H3a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z"/></svg>
+                  </a>
+              </div>`;
+
+        var justifyState = localStorage.getItem("justify");
+        if (justifyState === "true") {
+          contents[0].style.textAlign = "justify";
+        } else {
+          contents[0].style.textAlign = "start";
+        }
+      }
+
       var toc = document.getElementsByClassName("right-sidebar");
       var hideTOC = function () {
         if (toc.length > 0) {
