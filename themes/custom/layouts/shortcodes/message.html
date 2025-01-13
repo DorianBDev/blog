@@ -31,13 +31,11 @@
 {{- $type := .Get "type" | default "note" -}}
 {{- $inner := .Inner | .Page.RenderString -}}
 {{- $color := index $colorMap $type | default (index $colorMap "note") -}}
-<details {{ if .Get `open` | default true | ne false }} open{{ end }} style="border-left-color: {{- $color -}};">
-  <summary>
-    <div class="title">
-      <i style="color: {{- $color -}};" class="{{ index $iconMap $type | default (index $iconMap "note") }}"></i>
-      &nbsp;&nbsp;
-      {{ .Get "title" }}
-      </div>
-    </summary>
+<div class="message" style="border-left-color: {{- $color -}};">
+  <div class="title">
+    <i style="color: {{- $color -}}; padding-top: 3px;" class="{{ index $iconMap $type | default (index $iconMap "note") }}"></i>
+    &nbsp;&nbsp;
+    {{ .Get "title" }}
+  </div>
   <p>{{- $inner -}}</p>
-</details>
+</div>

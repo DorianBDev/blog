@@ -210,6 +210,36 @@ summary::-webkit-details-marker {
   }
 }
 
+.box {
+  background-color: #222222;
+  border: 1px solid #888888;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.message {
+  background: #111111;
+  border-left-style: solid;
+  border-left-width: 0.4rem;
+  border-radius: 0.2rem;
+  padding: 0.5rem 1rem;
+  padding: 0px;
+}
+
+.message .title {
+  background: #2e2e2e;
+  display: flex;
+  padding: 2px 0px 2px 5px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.message p {
+  padding: 1rem 1rem;
+  margin: 0px;
+}
+
 /*
 * Print support, any class in this section will be removed when printing (e.g. to PDF).
 */
