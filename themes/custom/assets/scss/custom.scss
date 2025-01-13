@@ -240,6 +240,23 @@ summary::-webkit-details-marker {
   margin: 0px;
 }
 
+.drawio {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.drawio svg {
+  width: 100%;
+}
+
+.drawio svg .svg-pan-zoom-control-background {
+  fill: black;
+}
+
+.drawio svg .svg-pan-zoom-control-element {
+  fill: white;
+}
+
 /*
 * Print support, any class in this section will be removed when printing (e.g. to PDF).
 */
