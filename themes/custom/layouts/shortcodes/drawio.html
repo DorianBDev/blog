@@ -1,6 +1,6 @@
 <div class="drawio">
   {{ $file := .Get 0 }}
-  {{ (printf "%s%s.drawio.svg" .Page.File.Dir $file) | readFile | safeHTML }}
+  {{ (printf "%s%s.drawio.svg" .Page.File.Dir $file) | readFile | replaceRE "color-scheme: light dark;" "color-scheme: dark;" | safeHTML }}
 </div>
 
 {{ .Page.Store.Set "hasSvg" true }}
