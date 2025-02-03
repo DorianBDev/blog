@@ -299,6 +299,17 @@ summary::-webkit-details-marker {
   opacity: 1;
 }
 
+.article-content code {
+  color: var(--pre-text-color);
+  background-color: var(--pre-background-color);
+  /* color: black; */
+  /* background-color: #999; */
+}
+
+li {
+  list-style-type: circle;
+}
+
 /*
 * Print support, any class in this section will be removed when printing (e.g. to PDF).
 */
