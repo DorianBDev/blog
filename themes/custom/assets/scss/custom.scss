@@ -211,10 +211,10 @@ summary::-webkit-details-marker {
 }
 
 .box {
-  background-color: #222222;
-  border: 1px solid #888888;
+  background-color: #0f0f0f;
+  border: 1px solid #2e2e2e;
   border-radius: 10px;
-  padding: 10px;
+  padding: 10px 20px;
 }
 
 .message {
@@ -379,5 +379,10 @@ ul li {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
     color-adjust: exact;
+  }
+  .drawio {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: #151515;
   }
 }
