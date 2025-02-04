@@ -310,6 +310,14 @@ li {
   list-style-type: circle;
 }
 
+#main-menu {
+  overflow: hidden;
+}
+
+#main-menu li {
+  list-style: none;
+}
+
 /*
 * Print support, any class in this section will be removed when printing (e.g. to PDF).
 */
