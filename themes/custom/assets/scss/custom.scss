@@ -224,6 +224,16 @@ summary::-webkit-details-marker {
   border-radius: 0.2rem;
   padding: 0.5rem 1rem;
   padding: 0px;
+  margin: 0px;
+  width: auto;
+}
+
+.message summary {
+  padding: 0px 10px 0px 0px;
+}
+
+.message summary::after {
+  padding-top: 4px;
 }
 
 .message .title {
@@ -238,6 +248,10 @@ summary::-webkit-details-marker {
 .message p {
   padding: 1rem 1rem;
   margin: 0px;
+}
+
+.message .code .highlight {
+  padding: 10px;
 }
 
 .drawio {

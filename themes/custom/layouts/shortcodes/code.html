@@ -1,0 +1,20 @@
+{{- $details := .Get "details" | default true -}}
+{{- $open := .Get "open" | default true -}}
+{{- $border := .Get "border" | default true -}}
+{{- $inner := .Inner | .Page.RenderString -}}
+{{ if $details }}
+  <details {{ if $open | default true | ne false }} open{{ end }}
+{{ else }}
+  <div
+{{ end }}
+  class="message" {{ if $border }} style="border-left-color: #bdc3c7;" {{else}} style="border: none;" {{ end }}>
+
+  {{ if $details }}<summary>{{ end }}
+    <div class="title">
+      <i style="color: #bdc3c7; padding-top: 3px;" class="fas fa-solid fa-code"></i>
+      &nbsp;&nbsp;
+      {{ .Get "title" }}
+    </div>
+  {{ if $details }}</summary>{{ end }}
+  <div class="code"> {{- $inner -}} </div>
+{{ if $details -}} </details> {{ else }} </div> {{ end }}

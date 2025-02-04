@@ -29,13 +29,24 @@
 {{- $colorMap  = dict "code" "#bdc3c7" | merge $colorMap -}}
 
 {{- $type := .Get "type" | default "note" -}}
+{{- $details := .Get "details" | default true -}}
+{{- $open := .Get "open" | default true -}}
+{{- $border := .Get "border" | default true -}}
 {{- $inner := .Inner | .Page.RenderString -}}
 {{- $color := index $colorMap $type | default (index $colorMap "note") -}}
-<div class="message" style="border-left-color: {{- $color -}};">
-  <div class="title">
-    <i style="color: {{- $color -}}; padding-top: 3px;" class="{{ index $iconMap $type | default (index $iconMap "note") }}"></i>
-    &nbsp;&nbsp;
-    {{ .Get "title" }}
-  </div>
+{{ if $details }}
+  <details {{ if $open | default true | ne false }} open{{ end }}
+{{ else }}
+  <div
+{{ end }}
+  class="message" {{ if $border }} style="border-left-color: {{- $color -}};" {{else}} style="border: none;" {{ end }}>
+
+  {{ if $details }}<summary>{{ end }}
+    <div class="title">
+      <i style="color: {{- $color -}}; padding-top: 3px;" class="{{ index $iconMap $type | default (index $iconMap "note") }}"></i>
+      &nbsp;&nbsp;
+      {{ .Get "title" }}
+    </div>
+  {{ if $details }}</summary>{{ end }}
   <p>{{- $inner -}}</p>
-</div>
+{{ if $details -}} </details> {{ else }} </div> {{ end }}
