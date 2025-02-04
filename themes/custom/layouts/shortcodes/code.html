@@ -1,6 +1,6 @@
 {{- $details := .Get "details" | default true -}}
 {{- $open := .Get "open" | default true -}}
-{{- $border := .Get "border" | default true -}}
+{{- $border := .Get "border" | default false -}}
 {{- $inner := .Inner | .Page.RenderString -}}
 {{ if $details }}
   <details {{ if $open | default true | ne false }} open{{ end }}
