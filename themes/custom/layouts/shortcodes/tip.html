@@ -1,6 +1,3 @@
-{{- $text := .Get 0 -}} {{- $tip := .Get 1 -}}
-
-<div class="tooltip">
-  {{ $text }}
-  <span class="tooltiptext"> {{ $tip }} </span>
-</div>
+<span title="{{- .Get 1 -}}" class="tooltip">
+  {{- .Get 0 -}}
+</span>
