@@ -18,6 +18,8 @@ languages:
         weight: 2
         disabled: true
 
+enableInlineShortcodes: true
+
 # Change it to your Disqus shortname before using
 disqusShortname: dorianb-blog
 

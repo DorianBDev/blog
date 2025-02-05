@@ -325,6 +325,7 @@ ul li {
   .footer,
   .giscus,
   .no-print,
+  .svg-pan-zoom-control,
   #stars,
   #print,
   #sidebars-control,
@@ -351,5 +352,50 @@ ul li {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     background-color: #151515;
+  }
+}
+
+/* hacky way to obtain XY Chart dark theming */
+.mermaid svg[aria-roledescription="xychart"] {
+  background-color: var(--background-secondary);
+
+  & g.main {
+    & rect.background {
+      opacity: 0;
+    }
+
+    & g.chart-title text {
+      fill: white;
+    }
+
+    & g.plot {
+      /* bar chart */
+      & rect {
+        fill: grey !important;
+      }
+
+      /* line chart */
+      & path {
+        stroke: white !important;
+      }
+    }
+
+    /* choose color for axes */
+    & g.bottom-axis,
+    & g.left-axis {
+      & path {
+        stroke: white !important;
+      }
+
+      & g.label text,
+      & g.title text {
+        fill: white;
+      }
+    }
+
+    /* no ticks on bottom axis */
+    & g.bottom-axis g.ticks {
+      display: none;
+    }
   }
 }
