@@ -7,7 +7,7 @@
     {{ if .Store.Get "hasMermaid" }}
     <script type="module">
       import mermaid from "https://cdn.jsdelivr.net/npm/mermaid/+esm";
-      mermaid.initialize({ startOnLoad: true, theme: "dark" });
+      mermaid.initialize({ startOnLoad: true, securityLevel: "loose", theme: "dark" });
     </script>
     {{ end }}
 
